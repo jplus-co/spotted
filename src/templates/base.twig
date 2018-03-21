@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% include 'html-head.twig' %}
+</head>
+<body>
+
+	<noscript>
+		{% include 'noscript.twig' %}
+	</noscript>
+
+	<nav>
+		<a href="{{site.url}}" data-namespace="home">Home</a>
+	</nav>
+
+	<div id="barba-wrapper" class="relative w-100 h-100">
+		{% block content %}
+			<div class="barba-container" data-namespace="home">
+		    {% if posts %}
+					<h1>{{site.title}}</h1>
+		      <ul>
+		        {% for post in posts %}
+		          <li>
+		            <a href="{{post.link|relative}}" data-namespace="single">{{post.title}}</a>
+		          </li>
+		        {% endfor %}
+		      </ul>
+				{% else %}
+		      <p>No posts.</p>
+		    {% endif %}
+			</div>
+		{% endblock %}
+	</div>
+
+	<script>
+		window.APP = window.APP || {}
+		APP.BASE_URL = '{{site.url}}'
+		APP.BASE_URL_RELATIVE = '{{site.url|relative}}'
+		APP.THEME_URL = '{{site.theme.uri}}'
+		APP.AJAX_URL = '{{fn('admin_url', 'admin-ajax.php')}}'
+	</script>
+  <script src="{{site.theme.link}}/static/bundle.js" defer></script>
+	{{ wp_footer }}
+</body>
+</html>

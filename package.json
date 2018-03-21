@@ -1,0 +1,37 @@
+{
+  "name": "spotted",
+  "version": "1.0.0",
+  "description": "A WordPress theme for Spotted",
+  "scripts": {
+    "build": "webpack -p --config webpack.production.js",
+    "start": "webpack --watch --config webpack.development.js"
+  },
+  "dependencies": {
+    "animejs": "^2.2.0",
+    "barba.js": "^1.0.0",
+    "dom-css": "^2.1.0",
+    "domready": "^1.0.8",
+    "fastclick": "^1.0.6",
+    "sniffer": "github:watsondg/sniffer",
+    "tachyons": "^4.9.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.5",
+    "cssnano": "^3.10.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "postcss-loader": "^2.0.6",
+    "stats.js": "^0.17.0",
+    "webpack": "^3.5.5",
+    "webpack-merge": "^4.1.0"
+  },
+  "author": "Mike Wagenheim <mike@wagz.io> (http://wagz.io)",
+  "license": "ISC"
+}
