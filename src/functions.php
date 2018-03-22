@@ -12,9 +12,9 @@ if ( ! class_exists( 'Timber' ) ) {
   return;
 }
 
-Timber::$dirname = array('templates', 'templates/partials', 'templates/layouts');
+Timber::$dirname = array('views', 'views/partials', 'views/layouts');
 
-class WPBoilerplateSite extends TimberSite {
+class SpottedSite extends TimberSite {
 	function __construct() {
 		show_admin_bar(false);
 
@@ -39,7 +39,9 @@ class WPBoilerplateSite extends TimberSite {
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
 
 		add_action( 'init', array( $this, 'add_custom_options_page' ) );
+		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
 		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
+		add_action( 'admin_head', array( $this, 'customize_page_meta_boxes' ) );
 
 		parent::__construct();
 	}
@@ -70,9 +72,41 @@ class WPBoilerplateSite extends TimberSite {
 		return $twig;
 	}
 
+	function change_title_text( $title ){
+		$screen = get_current_screen();
+
+		if  ( 'testimonial' == $screen->post_type ) {
+			$title = 'Enter testimonial attribution here';
+		}
+
+		return $title;
+	}
+
 	function deregister_scripts() {
  		wp_deregister_script( 'wp-embed' );
 	}
+
+	function customize_page_meta_boxes() {
+		$slug = get_post_field( 'post_name' );
+
+		remove_meta_box( 'postimagediv', 'page', 'side' );
+
+		if ( 'home' == $slug || 'about' == $slug || 'platform' == $slug ) {
+			remove_meta_box( 'pageparentdiv', 'page', 'side' );
+		}
+
+		echo '
+			<style>
+				label[for="parent_id"],
+				select[name="parent_id"],
+				label[for="menu_order"],
+				input[name="menu_order"],
+				input[name="menu_order"] + p {
+					display: none;
+				}
+			</style>
+		';
+	}   
 }
 
-new WPBoilerplateSite();
+new SpottedSite();
