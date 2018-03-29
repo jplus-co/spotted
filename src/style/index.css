@@ -1,1 +1,8 @@
-/* styles */
+/*
+styles processed with PostCSS like so:
+precss -> autoprefixer -> cssnano
+*/
+
+@import 'base/index.css';
+@import 'layouts/index.css';
+@import 'partials/index.css';

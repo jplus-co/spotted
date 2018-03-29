@@ -33,6 +33,7 @@ module.exports = {
               loader: 'postcss-loader',
               options: {
                 plugins: loader => [
+                  require('precss'),
                   require('autoprefixer'),
                   require('cssnano'),
                 ],

@@ -1,0 +1,55 @@
+<header class="header js-header">
+  <div class="header__inner-wrapper">
+    <a class="header__home-link js-home-link" href="{{site.link|relative}}" >
+      <img class="header__logo-img" src="{{site.theme.link}}/assets/images/logo-black@2x.png" alt="Spotted Logo">
+    </a>
+    <nav class="nav js-nav">
+      {% for item in nav.get_items %}
+        {% if item.children|length and loop.index != loop.length %}
+          <span class="nav__item nav__item--dropdown js-dropdown">
+            <button class="dropdown__toggle js-dropdown-toggle">
+              {{item.title}}
+            </button>
+            <div class="dropdown__outer-wrapper js-dropdown-outer">              
+              <div class="dropdown__inner-wrapper">
+                <ul class="dropdown__list js-dropdown-list">
+                  {% for child in item.get_children %}
+                    <li class="dropdown__item js-dropdown-item">
+                      <a
+                        {% if child.is_external %}
+                          class="dropdown__link"
+                          target="_blank"
+                          rel="noopener"
+                          href="{{child.link}}"
+                        {% else %}
+                          class="dropdown__link{{ child.current ? ' dropdown__link--current' }}"
+                          href="{{child.link|relative}}"
+                        {% endif %} 
+                      >
+                          <span>{{child.title}}</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </span>
+        {% else %}
+          <a
+            {% if item.is_external %}
+              class="nav__{{loop.index == loop.length ? 'button' : 'item nav__item--link'}}"
+              target="_blank"
+              rel="noopener"
+              href="{{item.link}}"
+            {% else %}
+              class="nav__{{loop.index == loop.length ? 'button js-button' : 'item nav__item--link'}}{{ child.current ? ' nav__item--current' }}"
+              href="{{item.link|relative}}"
+            {% endif %}
+          >
+            <span>{{item.title}}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
+</header>

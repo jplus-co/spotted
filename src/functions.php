@@ -60,7 +60,8 @@ class SpottedSite extends TimberSite {
 	}
 
 	function add_to_context( $context ) {
-		$context['menu'] = new TimberMenu();
+		$context['primary_navigation'] = new TimberMenu('Primary Navigation');
+		$context['footer_navigation'] = new TimberMenu('Footer Navigation');
 		$context['site'] = $this;
 		// $context['options'] = get_fields('option');
 		return $context;

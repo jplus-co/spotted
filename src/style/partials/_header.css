@@ -1,0 +1,27 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--white);
+
+  &__inner-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3.5rem;
+  }
+
+  &__home-link {
+    width: 13rem;
+  }
+
+  &__logo-img {
+    width: 100%;
+    height: auto;
+    margin-top: 1px;
+  }
+}
