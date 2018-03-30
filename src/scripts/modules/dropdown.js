@@ -9,48 +9,49 @@ class Dropdown {
     this.$list = this.$el.find('.js-dropdown-list')
     this.$header = this.$el.closest('.js-header')
     this.$outer = this.$el.find('.js-dropdown-outer')
+    this.$links = this.$el.find('.js-dropdown-link')
     this.items = this.$el.find('.js-dropdown-item').toArray()
-
+    this.ESC_KEYCODE = 27
     this.init()
   }
 
   init() {
     this.resize()
-    this.$el.on('mouseenter', this.onEnter)
+    this.$el.on('click mouseenter', this.handle)
   }
 
   destroy() {
-    this.$el.off('mouseenter', this.onEnter)
+    this.$el.off('click mouseenter', this.handle)
   }
 
-  onEnter = () => {
+  handle = ev => {
     if (this.$el.hasClass('expanded')) return
 
     this.hide()
     this.show()
 
-    $(document).on('mousemove', this.onMove)
+    $(document).on(
+      ev.type === 'mouseenter' ? 'mousemove' : 'click keyup',
+      this.awaitHide,
+    )
   }
 
-  onMove = ({ target, clientX, clientY }) => {
+  awaitHide = ev => {
     if (
-      clientY > this.top ||
-      $(target)
+      ev.keyCode === this.ESC_KEYCODE ||
+      ev.clientY > this.top ||
+      $(ev.target)
         .closest('a')
         .hasClass('nav__item')
     ) {
-      this.onLeave()
+      $(document).off(ev.type, this.awaitHide)
+      this.hide()
     }
-  }
-
-  onLeave() {
-    $(document).off('mousemove', this.onMove)
-    this.hide()
   }
 
   show() {
     this.$el.addClass('expanded')
-
+    this.$links.attr('tabindex', '0')
     anime.remove(this.items)
     anime({
       targets: this.items,
@@ -63,10 +64,8 @@ class Dropdown {
   }
 
   hide() {
-    this.$header
-      .find('.expanded')
-      .each((i, el) => $(el).removeClass('expanded'))
-
+    this.$header.find('.expanded').removeClass('expanded')
+    this.$header.find('.js-dropdown-link').attr('tabindex', '-1')
     anime.remove(this.items)
     anime({
       targets: this.items,

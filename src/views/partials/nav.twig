@@ -12,14 +12,15 @@
                 <li class="dropdown__item js-dropdown-item">
                   <a
                     {% if child.is_external %}
-                      class="dropdown__link"
+                      class="dropdown__link js-dropdown-link"
                       target="_blank"
                       rel="noopener"
                       href="{{child.link}}"
                     {% else %}
-                      class="dropdown__link{{ child.current ? ' current' }}"
+                      class="dropdown__link js-dropdown-link{{ child.current ? ' current' }}"
                       href="{{child.link|relative}}"
                     {% endif %} 
+                    tabindex="-1"
                   >
                       <span>{{child.title}}</span>
                   </a>
