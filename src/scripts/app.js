@@ -3,8 +3,11 @@ import config from './config'
 import Header from './modules/header'
 
 class App {
-  el = config.app
-  header = new Header($('.js-header'))
+  constructor() {
+    this.el = config.app
+    this.header = new Header($('.js-header'))
+    this.$nav = $('.js-nav')
+  }
 
   onResize(width, height) {
     this.header.resize(width, height)

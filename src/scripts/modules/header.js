@@ -1,6 +1,8 @@
 import $ from 'jquery'
+import config from '../config'
 import Button from './button'
-import Dropdown from './Dropdown'
+import Dropdown from './dropdown'
+import MobileNav from './mobile-nav'
 
 class Header {
   constructor(el) {
@@ -10,6 +12,10 @@ class Header {
       .find('.js-dropdown')
       .toArray()
       .map(el => new Dropdown(el))
+    this.mobileNav = new MobileNav({
+      toggle: el.find('.js-nav-toggle'),
+      menu: el.find('.js-nav-menu'),
+    })
   }
 
   resize(w, h) {

@@ -78,16 +78,17 @@
       position: absolute;
       left: 1rem;
       bottom: 0.6rem;
-      transform-origin: left;
+      transform-origin: right;
       transition: transform 0.6s var(--ease-out-quint);
       transform: scaleX(0);
       pointer-events: none;
     }
 
     &:hover,
-    &--current {
+    &.current {
       &::before {
         transform: scaleX(1);
+        transform-origin: left;
       }
     }
   }

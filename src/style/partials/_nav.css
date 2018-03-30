@@ -3,6 +3,10 @@
   align-items: baseline;
   height: 100%;
 
+  @media (width <= 850px) {
+    display: none;
+  }
+
   &__item {
     position: relative;
     color: var(--true-black);
@@ -35,7 +39,7 @@
       position: absolute;
       left: 1rem;
       bottom: 2.6rem;
-      transform-origin: left;
+      transform-origin: right;
       transition: transform 0.7s var(--ease-out-quint);
       transform: scaleX(0);
       pointer-events: none;
@@ -43,9 +47,10 @@
 
     &:hover,
     &.expanded,
-    &--current {
+    &.current {
       &::before {
         transform: scaleX(1);
+        transform-origin: left;
       }
     }
   }

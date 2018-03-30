@@ -19,6 +19,10 @@ class Dropdown {
     this.$el.on('mouseenter', this.onEnter)
   }
 
+  destroy() {
+    this.$el.off('mouseenter', this.onEnter)
+  }
+
   onEnter = () => {
     if (this.$el.hasClass('expanded')) return
 
@@ -33,7 +37,7 @@ class Dropdown {
       clientY > this.top ||
       $(target)
         .closest('a')
-        .hasClass('nav__item--link')
+        .hasClass('nav__item')
     ) {
       this.onLeave()
     }

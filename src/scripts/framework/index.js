@@ -1,10 +1,10 @@
 import Barba from 'barba.js'
+import $ from 'jquery'
 import config from '../config'
 import views from '../views'
 import transitionReducer from '../transitions'
 import sniffer from 'sniffer'
 import FastClick from 'fastclick'
-import css from 'dom-css'
 
 class Framework {
   constructor(app) {
@@ -22,7 +22,8 @@ class Framework {
   }
 
   addEvents() {
-    window.addEventListener('resize', this.onResize)
+    $(window).resize(this.onResize)
+    Barba.Dispatcher.on('linkClicked', this.onLinkClicked)
     Barba.Dispatcher.on('initStateChange', this.onInitStateChange)
     Barba.Dispatcher.on('newPageReady', this.onNewPageReady)
     Barba.Dispatcher.on('transitionCompleted', this.onTransitionCompleted)
@@ -51,6 +52,14 @@ class Framework {
     )
   }
 
+  onLinkClicked = (link, ev) => {
+    const $link = $(link)
+    this.app.$nav.find('.current').removeClass('current')
+    if ($link.closest('.js-nav')) {
+      $link.addClass('current')
+    }
+  }
+
   onNewPageReady = () => {
     config.body.classList.add(
       `is-${Barba.Pjax.History.currentStatus().namespace}`,
@@ -64,11 +73,11 @@ class Framework {
   }
 
   onInitStateChange() {
-    css(config.html, { pointerEvents: 'none' })
+    $(config.html).css({ pointerEvents: 'none' })
   }
 
   onTransitionCompleted() {
-    css(config.html, { pointerEvents: 'auto' })
+    $(config.html).css({ pointerEvents: 'auto' })
   }
 }
 
