@@ -19,6 +19,12 @@ class Framework {
     config.sniffer = sniffer.getInfos()
     sniffer.addClasses(config.body)
     config.sniffer.isDevice && FastClick.attach(config.body)
+    // Revive :focus styles if user presses the tab key
+    $(document).on('keyup', function awaitTab({ keyCode }) {
+      if (keyCode !== 9) return
+      $(document).off('keydown', awaitTab)
+      $(config.body).removeClass('no-tab')
+    })
   }
 
   addEvents() {
@@ -41,10 +47,11 @@ class Framework {
     config.windowWidth = window.innerWidth
     config.windowHeight = window.innerHeight
 
-    // Propogate window resize event through app and Barba views
+    // Propogate window resize event through app
     typeof this.app.onResize === 'function' &&
       this.app.onResize(config.windowWidth, config.windowHeight)
 
+    // Propogate window resize event through Barba views
     views.map(
       view =>
         typeof view.onResize === 'function' &&
