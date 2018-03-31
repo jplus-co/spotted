@@ -51,6 +51,7 @@ class Dropdown {
 
   show() {
     this.$el.addClass('expanded')
+    this.$el.find('.js-dropdown-toggle').attr('aria-expanded', 'true')
     this.$links.attr('tabindex', '0')
     anime.remove(this.items)
     anime({
@@ -66,6 +67,7 @@ class Dropdown {
   hide() {
     this.$header.find('.expanded').removeClass('expanded')
     this.$header.find('.js-dropdown-link').attr('tabindex', '-1')
+    this.$header.find('.js-dropdown-toggle').attr('aria-expanded', 'false')
     anime.remove(this.items)
     anime({
       targets: this.items,

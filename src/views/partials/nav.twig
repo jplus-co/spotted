@@ -1,13 +1,13 @@
 <nav class="nav js-nav">
   {% for item in nav.get_items %}
     {% if item.children|length and loop.index != loop.length %}
-      <span class="nav__item js-dropdown">
-        <button class="dropdown__toggle js-dropdown-toggle">
+      <span class="nav__item js-dropdown" aria-label="Dropdown Menu">
+        <button class="dropdown__toggle js-dropdown-toggle" aria-expanded="false" aria-controls="dropdown-{{loop.index}}">
           {{item.title}}
         </button>
         <div class="dropdown__outer-wrapper js-dropdown-outer">              
           <div class="dropdown__inner-wrapper">
-            <ul class="dropdown__list js-dropdown-list">
+            <ul class="dropdown__list js-dropdown-list" id="dropdown-{{loop.index}}">
               {% for child in item.get_children %}
                 <li class="dropdown__item js-dropdown-item">
                   <a
