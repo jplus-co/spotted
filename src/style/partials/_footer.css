@@ -24,7 +24,7 @@
     &::before {
       content: '';
       display: block;
-      background-color: color-mod(var(--purple) a(50%));
+      background-color: color-mod(var(--purple) a(75%));
       width: calc(100% - 4.8rem);
       height: 8px;
       position: absolute;
@@ -56,8 +56,15 @@
   }
 
   &__social-link {
-    .icon .primary-path {
-      transition: fill 0.7s var(--ease-out-quint);
+    .icon {
+      &--medium {
+        width: 3.9rem;
+        height: 3.9rem;
+      }
+
+      .primary-path {
+        transition: fill 0.7s var(--ease-out-quint);
+      }
     }
 
     &:hover .icon .primary-path {
