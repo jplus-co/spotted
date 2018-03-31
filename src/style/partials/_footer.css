@@ -36,9 +36,7 @@
       pointer-events: none;
     }
 
-    &:hover,
-    &.expanded,
-    &.current {
+    &:hover {
       &::before {
         transform: scaleX(1);
         transform-origin: left;

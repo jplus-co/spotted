@@ -29,7 +29,6 @@ class Framework {
 
   addEvents() {
     $(window).resize(this.onResize)
-    Barba.Dispatcher.on('linkClicked', this.onLinkClicked)
     Barba.Dispatcher.on('initStateChange', this.onInitStateChange)
     Barba.Dispatcher.on('newPageReady', this.onNewPageReady)
     Barba.Dispatcher.on('transitionCompleted', this.onTransitionCompleted)
@@ -59,24 +58,18 @@ class Framework {
     )
   }
 
-  onLinkClicked = (link, ev) => {
-    const $link = $(link)
-    this.app.$nav.find('.current').removeClass('current')
-    if ($link.closest('.js-nav')) {
-      $link.addClass('current')
-    }
-  }
-
-  onNewPageReady = () => {
-    config.body.classList.add(
-      `is-${Barba.Pjax.History.currentStatus().namespace}`,
-    )
-
-    if (Barba.Pjax.History.prevStatus()) {
-      config.body.classList.remove(
-        `is-${Barba.Pjax.History.prevStatus().namespace}`,
-      )
-    }
+  onNewPageReady = currentStatus => {
+    // get path of current view
+    const path = currentStatus.url.split(window.location.origin)[1].substring(1)
+    const $link = this.app.$nav.find(`[href="/${path}"]`)
+    // remove all 'current-menu-item' classes
+    this.app.$nav.find('.current-menu-item').removeClass('current-menu-item')
+    // add 'current-menu-item' class
+    $link.addClass('current-menu-item')
+    // add 'current-menu-item' to any parent menu items
+    $link.closest('.js-dropdown').addClass('current-menu-item')
+    // add `is-${namespace}` class to body for current view
+    this.updateBodyClass()
   }
 
   onInitStateChange() {
@@ -85,6 +78,18 @@ class Framework {
 
   onTransitionCompleted() {
     $(config.html).css({ pointerEvents: 'auto' })
+  }
+
+  updateBodyClass() {
+    $(config.body).addClass(
+      `is-${Barba.Pjax.History.currentStatus().namespace}`,
+    )
+
+    if (Barba.Pjax.History.prevStatus()) {
+      $(config.body).removeClass(
+        `is-${Barba.Pjax.History.prevStatus().namespace}`,
+      )
+    }
   }
 }
 

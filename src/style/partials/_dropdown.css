@@ -85,7 +85,7 @@
     }
 
     &:hover,
-    &.current {
+    &.current-menu-item {
       &::before {
         transform: scaleX(1);
         transform-origin: left;

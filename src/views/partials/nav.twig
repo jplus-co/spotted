@@ -11,13 +11,12 @@
               {% for child in item.get_children %}
                 <li class="dropdown__item js-dropdown-item">
                   <a
+                    class="dropdown__link js-dropdown-link{{child.classes|join(' ')}}"
                     {% if child.is_external %}
-                      class="dropdown__link js-dropdown-link"
                       target="_blank"
                       rel="noopener"
                       href="{{child.link}}"
                     {% else %}
-                      class="dropdown__link js-dropdown-link{{ child.current ? ' current' }}"
                       href="{{child.link|relative}}"
                     {% endif %} 
                     tabindex="-1"
@@ -32,13 +31,12 @@
       </span>
     {% else %}
       <a
+        class="nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}{{item.classes|join(' ')}}"
         {% if item.is_external %}
-          class="nav__{{loop.index == loop.length ? 'button' : 'item'}}"
           target="_blank"
           rel="noopener"
           href="{{item.link}}"
         {% else %}
-          class="nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}{{ item.current ? ' current' }}"
           href="{{item.link|relative}}"
         {% endif %}
       >

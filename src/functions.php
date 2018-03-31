@@ -37,11 +37,13 @@ class SpottedSite extends TimberSite {
 
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
+		add_filter( 'nav_menu_css_class', array( $this, 'special_nav_class' ), 10, 2 );
 
 		add_action( 'init', array( $this, 'add_custom_options_page' ) );
 		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
 		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
 		add_action( 'admin_head', array( $this, 'customize_page_meta_boxes' ) );
+
 
 		parent::__construct();
 	}
@@ -71,6 +73,18 @@ class SpottedSite extends TimberSite {
 		$twig->addExtension( new Twig_Extension_StringLoader() );
 		$twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
+	}
+
+	function special_nav_class($classes, $item){
+		if (
+			in_array( 'current-menu-item', $classes ) ||
+			in_array('current-menu-ancestor', $classes )
+		) {
+			$classes = array_diff($classes, array('current-menu-item'));
+			$classes[] = 'current-menu-item';
+		}
+
+		return $classes;
 	}
 
 	function change_title_text( $title ){
