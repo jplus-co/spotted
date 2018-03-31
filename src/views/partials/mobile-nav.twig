@@ -1,12 +1,12 @@
+<button class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
+  <span class="nav-toggle__icon">
+    <span class="line bg-black"></span>
+    <span class="line bg-black"></span>
+  </span>
+</button>
+
 <nav class="nav-menu js-nav-menu" id="mobile-nav">
   <div class="nav-menu__inner-wrapper">
-    <button class="nav-toggle js-nav-toggle">
-      <span class="nav-toggle__label js-nav-toggle-label white">Close</span>
-      <span class="nav-toggle__icon">
-        <span class="line bg-white"></span>
-        <span class="line bg-white"></span>
-      </span>
-    </button>
     {% for item in nav.get_items %}
       {% if item.children|length and loop.index != loop.length %}
         <span class="nav-menu__item accordian js-nav-menu-item js-accordian" aria-label="Accordion Control Group">
@@ -60,12 +60,12 @@
         </a>
       {% endif %}
     {% endfor %}
+    <button class="nav-toggle js-nav-toggle">
+      <span class="nav-toggle__label js-nav-toggle-label white">Close</span>
+      <span class="nav-toggle__icon">
+        <span class="line bg-white"></span>
+        <span class="line bg-white"></span>
+      </span>
+    </button>
   </div>
 </nav>
-
-<button class="nav-toggle js-nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
-  <span class="nav-toggle__icon">
-    <span class="line bg-black"></span>
-    <span class="line bg-black"></span>
-  </span>
-</button>
