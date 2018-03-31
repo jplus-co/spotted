@@ -30,21 +30,19 @@ class Dropdown {
     this.hide()
     this.show()
 
-    $(document).on(
-      ev.type === 'mouseenter' ? 'mousemove' : 'click keyup',
-      this.awaitHide,
-    )
+    $(document).on('mousemove click keydown', this.awaitHide)
   }
 
-  awaitHide = ev => {
+  awaitHide = ({ type, target, keyCode, clientY }) => {
+    const $target = $(target)
+
     if (
-      ev.keyCode === this.ESC_KEYCODE ||
-      ev.clientY > this.top ||
-      $(ev.target)
-        .closest('a')
-        .hasClass('nav__item')
+      (type === 'click' && $target.closest('.js-dropdown-link')) ||
+      keyCode === this.ESC_KEYCODE ||
+      clientY > this.top ||
+      $target.closest('a').hasClass('nav__item')
     ) {
-      $(document).off(ev.type, this.awaitHide)
+      $(document).off('mousemove click keydown', this.awaitHide)
       this.hide()
     }
   }
