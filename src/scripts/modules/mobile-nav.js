@@ -8,7 +8,7 @@ class MobileNav {
     this.$menu = opt.menu
     this.$accordianControls = this.$menu.find('.js-accordian-toggle')
     this.$accordianEls = this.$menu.find('.js-accordian-outer')
-    this.$focusableEls = this.$menu.find('button, a')
+    this.$focusableEls = this.$menu.find('.js-inert')
     this.menuItems = this.$menu.find('.js-nav-menu-item').toArray()
     this.init()
   }
@@ -49,7 +49,11 @@ class MobileNav {
   openMenu() {
     this.$toggle.toggleClass('open')
     this.$menu.toggleClass('open')
-    $('[aria-controls="mobile-nav"]').attr('aria-expanded', 'true')
+    this.$focusableEls.attr('tabindex', '0')
+    $('[aria-controls="mobile-nav"]')
+      .attr('aria-expanded', 'true')
+      .attr('tabindex', '-1')
+
     anime.remove(this.menuItems)
     anime({
       targets: this.menuItems,
@@ -65,7 +69,11 @@ class MobileNav {
   closeMenu() {
     this.$toggle.removeClass('open')
     this.$menu.removeClass('open')
-    $('[aria-controls="mobile-nav"]').attr('aria-expanded', 'false')
+    this.$focusableEls.attr('tabindex', '-1')
+    $('[aria-controls="mobile-nav"]')
+      .attr('aria-expanded', 'false')
+      .attr('tabindex', '0')
+
     anime.remove(this.menuItems)
     anime({
       targets: this.menuItems,
