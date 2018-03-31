@@ -53,12 +53,31 @@ class SpottedSite extends TimberSite {
 			acf_add_options_page(array(
 				'page_title' 	=> 'SEO',
 				'menu_title'	=> 'SEO',
-				'menu_slug' 	=> 'seo',
+				'menu_slug' 	=> 'spotted_seo',
 				'capability'	=> 'edit_posts',
-				'parent_slug' => 'options-general.php',
+				'icon_url'     => 'dashicons-search',
 				'redirect'		=> false
 			));
 		}
+
+		acf_add_options_page(array(
+			'page_title'   => 'Footer',
+			'menu_title'   => 'Footer',
+			'menu_slug'    => 'spotted_footer',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-arrow-down',
+			'redirect'     => false
+		));
+
+
+		acf_add_options_page(array(
+			'page_title'   => '404',
+			'menu_title'   => '404',
+			'menu_slug'    => 'spotted_not_found_page',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-no',
+			'redirect'     => false
+		));
 	}
 
 	function add_to_context( $context ) {
@@ -80,8 +99,7 @@ class SpottedSite extends TimberSite {
 			in_array( 'current-menu-item', $classes ) ||
 			in_array('current-menu-ancestor', $classes )
 		) {
-			$classes = array_diff($classes, array('current-menu-item'));
-			$classes[] = 'current-menu-item';
+			$classes = array('current-menu-item');
 		}
 
 		return $classes;
