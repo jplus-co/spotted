@@ -208,8 +208,20 @@
   background-color: var(--black);
   text-align: center;
 
+  @media (width <= 700px) {
+    padding: 4rem 2rem 6rem 2rem;
+  }
+
   &__nav {
     margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @media (width <= 500px) {
+      justify-content: flex-start;
+      margin-bottom: 6rem;
+    }
   }
 
   &__nav-link {
@@ -219,6 +231,13 @@
     text-decoration: none;
     font-family: 'Overpass Mono', sans-serif;
     padding: 1rem 2.4rem;
+
+    @media (width <= 500px) {
+      width: 50%;
+      text-align: left;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+    }
 
     span {
       position: relative;
@@ -259,6 +278,9 @@
 
   &__social-link {
     .icon {
+      width: 4rem;
+      height: 4rem;
+
       &--medium {
         width: 3.9rem;
         height: 3.9rem;

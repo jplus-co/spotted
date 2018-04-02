@@ -58,20 +58,20 @@
 
   &__button {
     position: relative;
-    font-family: 'Overpass Mono', monospace;
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    line-height: 1;
     text-decoration: none;
-    color: var(--white);
     background-color: var(--purple);
-    padding: 1.2rem 2.5rem;
+    padding: 0 2.5rem;
     margin-left: 1rem;
     text-align: center;
 
     span {
+      font-family: 'Overpass Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 3.8rem;
+      color: var(--white);
       position: relative;
       z-index: 1;
       pointer-events: none;
