@@ -1,10 +1,107 @@
 {% extends 'base.twig' %}
 
+{% set hero = post.get_field('hero') %}
+{% set why = post.get_field('why_block') %}
+{% set products = post.get_field('products_block') %}
+{% set brands = post.get_field('brands_block') %}
+
 {% block content %}
 
   <div class="barba-container" data-namespace="home">
     <main class="content">
+      {% include 'hero.twig' with hero %}
 
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{why.section_label}}</h2>
+        </aside>
+        <div class="section__row pt pb">
+          <div class="section__column black">
+            {% include 'text-block.twig' with { text_block: why.text_block } %}
+          </div>
+          <div class="section__column">
+            <div class="slideshow"></div>
+          </div>
+        </div>
+        <div class="section__row pt pb">
+          <div class="lede">{{ why.lede }}</div>
+        </div>
+        <ul class="list section__row flex-wrap pb">
+          {% for item in why.list %}
+            <li class="list__item flex w-50">
+              <div class="w-25">
+                <img src="{{Image(item.icon).src}}" alt="{{Image(item.icon).alt}}">
+              </div>
+              <div class="w-75">
+                <h3 class="list__heading">{{item.heading}}</h3>
+                <div class="list__body">{{item.body}}</div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+
+      <section class="section">
+        <div class="bg-black pb">
+          <aside class="section__aside">
+            <h2 class="section__sticky-label">{{products.section_label}}</h2>
+          </aside>
+          <div class="section__row pt pb">
+            <div class="section__column">
+            </div>
+            <div class="section__column white">
+              {% include 'text-block.twig' with { text_block: products.text_block } %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{brands.section_label}}</h2>
+        </aside>
+        <div class="section__row pt">
+          <div class="section__column black">
+            {% include 'text-block.twig' with { text_block: brands.text_block, no_button: true } %}
+          </div>
+        </div>
+        <ul class="list brand-list section__row flex-wrap items-center">
+          {% for brand in brands.brand_list %}
+            {% set logo = Image(brand.logo) %}
+            <li class="brand-list__item{{ logo.width / logo.height < 3 ? ' brand-list__item--tall' }}">
+              <img src="{{logo.src}}" alt="{{brand.name}}">
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="section__row">
+          {% include 'button.twig' with {
+            button_type: brands.text_block.button_type,
+            link: brands.text_block.link,
+            toggle_label: brands.text_block.toggle_label,
+          } %}
+        </div>
+        <div class="section__row items-start pb pr5">
+          <img src="{{site.theme.link}}/assets/images/curve-01@2x.png" alt="Light Blue Bezier Curve">
+        </div>
+        <div class="section__row pb">
+          <blockquote class="testimonial">
+            <div class="testimonial__quote">
+              <img src="{{site.theme.link}}/assets/images/open-quote@2x.png" alt="Open Quote">
+            </div>
+            <p class="testimonial__content">
+              {{brands.featured_testimonial.quote}}
+            </p>
+            <p class="testimonial__title">
+              {{brands.featured_testimonial.title}}
+            </p>
+          </blockquote>
+        </div>
+      </section>
+      <div class="bg-gray-blue white tc" style="height: 30rem; padding: 7.2rem 0;">
+        <div class="text-block__heading">
+          Spotted in the news
+        </div>
+      </div>
     </main>
     {% include 'footer.twig' %}
   </div>

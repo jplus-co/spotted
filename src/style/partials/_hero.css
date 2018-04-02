@@ -1,0 +1,61 @@
+.hero {
+  background-color: var(--black);
+  padding: var(--header-height) 3.5rem 0 3.5rem;
+
+  @media (width <= 700px) {
+    padding: var(--header-height) 2rem 0 2rem;
+  }
+
+  &__inner-wrapper {
+    width: 100%;
+    max-width: 110rem;
+    margin: 0 auto;
+    padding: 13.5rem 0;
+
+    @media (width <= 1000px) {
+      max-width: 87rem;
+    }
+
+    @media (width <= 850px) {
+      padding: 9rem 0;
+    }
+
+    @media (width <= 700px) {
+      padding: 6.5rem 0 9rem;
+    }
+  }
+
+  &__heading {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 5.5rem;
+    line-height: 1.2727;
+    color: var(--white);
+    margin: 0 0 2rem 0;
+    max-width: 80rem;
+
+    @media (width <= 850px) {
+      font-size: 5rem;
+    }
+
+    @media (width <= 700px) {
+      font-size: 4rem;
+    }
+  }
+
+  &__body {
+    font-family: 'Karla', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1.33;
+    color: var(--white);
+    max-width: 48rem;
+    margin: 0 0 4rem 0;
+
+    @media (width <= 700px) {
+      font-size: 1.6rem;
+    }
+
+    * {
+      margin: 0;
+    }
+  }
+}

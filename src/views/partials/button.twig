@@ -1,0 +1,16 @@
+{% if button_type == 'link' %}
+  <a
+    class="button js-button"
+    href="{{link.url}}"
+    target="{{link.target}}"
+  >
+    <span>{{link.title}}</span>
+  </a>
+{% elseif button_type == 'toggle' %}
+  <a
+    class="button js-button js-form-toggle"
+    href="#contact"
+  >
+    <span>{{toggle_label}}</span>
+  </a>
+{% endif %}

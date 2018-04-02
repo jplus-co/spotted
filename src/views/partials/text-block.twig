@@ -1,0 +1,15 @@
+<div class="text-block">
+  {% if text_block.heading %}
+    <h2 class="text-block__heading">{{text_block.heading}}</h2>
+  {% endif %}
+  {% if text_block.body %}
+    <div class="text-block__body">{{text_block.body}}</div>
+  {% endif %}
+  {% if not no_button %}
+    {% include 'button.twig' with {
+      button_type: button_type,
+      link: link,
+      toggle_label: toggle_label,
+    } %}
+  {% endif %}
+</div>

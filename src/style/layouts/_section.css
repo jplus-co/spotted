@@ -1,0 +1,52 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding: 0 7.5rem 0 3.5rem;
+
+  @media (width <= 700px) {
+    padding: 0 2rem;
+  }
+
+  &__aside {
+    position: absolute;
+    top: 0;
+    right: 3.5rem;
+    bottom: 0;
+    width: 1.6rem;
+  }
+
+  &__sticky-label {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    padding: 3.5rem 0;
+    margin: 0;
+
+    position: sticky;
+    top: var(--header-height);
+  }
+
+  &__row {
+    display: flex;
+    width: 100%;
+    max-width: 110rem;
+    margin: 0 auto;
+  }
+
+  &__column {
+    flex: 1;
+    margin: 0 3rem;
+
+    &:nth-child(odd) {
+      margin-left: 0;
+    }
+
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+  }
+}

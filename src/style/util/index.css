@@ -1,0 +1,15 @@
+.bg-black {
+  background-color: var(--black);
+}
+
+.bg-gray-blue {
+  background-color: var(--gray-blue);
+}
+
+.pt {
+  padding-top: 13.5rem;
+}
+
+.pb {
+  padding-bottom: 7.5rem;
+}

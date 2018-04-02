@@ -65,7 +65,7 @@ class Framework {
     )
   }
 
-  onNewPageReady = currentStatus => {
+  onNewPageReady = (currentStatus, prevStatus, container, html) => {
     // get path of current view
     const path = currentStatus.url.split(window.location.origin)[1].substring(1)
     const $link = this.app.$nav.find(`[href="/${path}"]`)
@@ -77,6 +77,9 @@ class Framework {
     $link.closest('.js-dropdown').addClass('current-menu-item')
     // add `is-${namespace}` class to body for current view
     this.updateBodyClass()
+    // Propogate event through app
+    typeof this.app.onNewPageReady === 'function' &&
+      this.app.onNewPageReady(currentStatus, prevStatus, container, html)
   }
 
   onInitStateChange() {

@@ -14,8 +14,12 @@ body {
   font-size: 1.6rem;
   background-color: var(--white);
 
-  &.no-tab * {
-    outline: unset;
+  &.no-tab {
+    button,
+    input,
+    a {
+      outline: unset;
+    }
   }
 }
 
@@ -23,4 +27,12 @@ main.content {
   width: 100%;
   min-height: 100vh;
   background-color: var(--white);
+}
+
+figure {
+  margin: 0;
+}
+
+::selection {
+  background-color: color-mod(var(--purple) a(25%));
 }
