@@ -1,3 +1,207 @@
+/* =========================== */
+/* ===== Newsletter Form ===== */
+/* =========================== */
+
+.newsletter-form {
+  background-color: var(--white);
+  padding: 6rem 3.5rem;
+
+  @media (width <= 700px) {
+    padding: 4rem 2rem;
+  }
+
+  &__inner-wrapper {
+    width: 100%;
+    max-width: 100rem;
+    margin: 0 auto;
+  }
+
+  &__column {
+    width: 60%;
+
+    @media (width <= 1000px) {
+      width: 50%;
+    }
+
+    @media (width <= 700px) {
+      width: 100%;
+    }
+  }
+
+  &__inputs {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s var(--ease-out-quint);
+
+    p:first-child {
+      flex: 1;
+    }
+
+    p:last-child {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .wpcf7 {
+    h4 {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      text-transform: uppercase;
+      margin: 0 7rem 0 0;
+      width: calc(100% / 3);
+
+      @media (width <= 1000px) {
+        width: 50%;
+        margin-right: 3rem;
+      }
+
+      @media (width <= 700px) {
+        display: block;
+        width: 100%;
+        margin: 0 0 2rem 0;
+      }
+    }
+
+    p {
+      margin: 0;
+      flex: 1;
+    }
+
+    .wpcf7-response-output {
+      margin: 0;
+      padding: 0;
+      font-family: 'Karla', sans-serif;
+      font-size: 1.8rem;
+      line-height: 1.33;
+    }
+
+    .wpcf7-mail-sent-ok {
+      border: none;
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        content: '✅';
+        margin-right: 0.4rem;
+      }
+
+      + .newsletter-form__inputs {
+        height: 0;
+      }
+    }
+
+    .wpcf7-validation-errors {
+      border: none;
+      display: flex;
+      align-items: start;
+      margin-bottom: 0.4rem;
+      font-size: 1.6rem;
+
+      &::before {
+        content: '⚠️';
+        margin-right: 0.4rem;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+
+      @media (width <= 700px) {
+        display: block;
+      }
+
+      label {
+        position: relative;
+        width: 100% !important;
+
+        .your-email {
+          display: block;
+          width: 100%;
+          margin-bottom: 0;
+        }
+
+        .wpcf7-not-valid-tip {
+          display: block;
+          font-size: 1.4rem;
+          font-family: 'Karla', sans-serif;
+          color: var(--purple);
+          position: absolute;
+          bottom: -2.2rem;
+          left: 0;
+        }
+      }
+    }
+
+    input[type='email'] {
+      width: 100%;
+      appearance: none;
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 1.4rem 0;
+      border-bottom: 0.2rem solid var(--black);
+      font-family: 'Overpass Mono', monospace;
+    }
+
+    button {
+      display: inline-block;
+      appearance: none;
+      background: none;
+      border: none;
+      margin: 0;
+      padding: 1.4rem 1rem;
+      cursor: pointer;
+      border-bottom: 0.2rem solid var(--black);
+      color: rgba(0, 0, 0, 0);
+      font-family: 'Roboto Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+
+      position: relative;
+
+      &:focus {
+        color: rgba(0, 0, 0, 1);
+        background-color: color-mod(var(--purple) a(10%));
+
+        &::before {
+          display: none;
+        }
+      }
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border-top: 2px solid var(--purple);
+        border-right: 2px solid var(--purple);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      + .ajax-loader {
+        display: none;
+      }
+    }
+  }
+}
+
+/* ================== */
+/* ===== Footer ===== */
+/* ================== */
+
 .footer {
   width: 100%;
   padding: 6rem 3.5rem 3.5rem 3.5rem;

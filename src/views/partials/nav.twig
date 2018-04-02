@@ -31,7 +31,7 @@
       </span>
     {% else %}
       <a
-        class="nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}{{item.classes|join(' ')}}"
+        class="{{item.classes|join(' ')}} nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}"
         {% if item.is_external %}
           target="_blank"
           rel="noopener"

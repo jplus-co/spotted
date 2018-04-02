@@ -1,3 +1,10 @@
+<section class="newsletter-form">
+  <div class="newsletter-form__inner-wrapper">
+    {% filter shortcodes %}
+      [contact-form-7 id="168" title="Email Newsletter"]
+    {% endfilter %}
+  </div>
+</section>
 <footer class="footer">
   <nav class="footer__nav">
     {% for item in footer_nav.get_items %}

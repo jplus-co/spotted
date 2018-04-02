@@ -20,8 +20,15 @@ class Framework {
     sniffer.addClasses(config.body)
     config.sniffer.isDevice && FastClick.attach(config.body)
     // Revive :focus styles if user presses the tab key
-    $(document).on('keyup', function awaitTab({ keyCode }) {
-      if (keyCode !== 9) return
+    $(document).on('keyup', function awaitTab({ target, keyCode }) {
+      if (
+        keyCode !== 9 ||
+        $(target)
+          .closest('form')
+          .hasClass('wpcf7-form')
+      ) {
+        return
+      }
       $(document).off('keydown', awaitTab)
       $(config.body).removeClass('no-tab')
     })

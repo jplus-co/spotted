@@ -81,6 +81,10 @@
   align-items: center;
   padding: 0 3.5rem;
 
+  @media (width <= 700px) {
+    padding-right: 2rem;
+  }
+
   @media (width > 850px) {
     display: none;
   }
