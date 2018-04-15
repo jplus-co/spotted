@@ -19,7 +19,8 @@ class Framework {
     config.sniffer = sniffer.getInfos()
     sniffer.addClasses(config.body)
     config.sniffer.isDevice && FastClick.attach(config.body)
-    // Revive :focus styles if user presses the tab key
+
+    // Revive focus styles if user presses the tab key
     $(document).on('keyup', function awaitTab({ target, keyCode }) {
       if (
         keyCode !== 9 ||

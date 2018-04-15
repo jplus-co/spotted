@@ -7,9 +7,9 @@
   {% endif %}
   {% if not no_button %}
     {% include 'button.twig' with {
-      button_type: button_type,
-      link: link,
-      toggle_label: toggle_label,
+      button_type: text_block.button_type,
+      link: text_block.link,
+      toggle_label: text_block.toggle_label,
     } %}
   {% endif %}
 </div>

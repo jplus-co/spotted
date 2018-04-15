@@ -88,7 +88,7 @@
       align-items: flex-start;
 
       &::before {
-        content: '✅';
+        content: '🙏';
         margin-right: 0.4rem;
       }
 
@@ -145,6 +145,7 @@
       appearance: none;
       background: none;
       border: none;
+      border-radius: 0;
       margin: 0;
       padding: 1.4rem 0;
       border-bottom: 0.2rem solid var(--black);
@@ -166,16 +167,11 @@
       font-size: 1.4rem;
       letter-spacing: 1px;
       text-transform: uppercase;
-
+      transition: background-color 0.7s var(--ease-out-quint);
       position: relative;
 
       &:focus {
-        color: rgba(0, 0, 0, 1);
         background-color: color-mod(var(--purple) a(10%));
-
-        &::before {
-          display: none;
-        }
       }
 
       &::before {
@@ -187,8 +183,8 @@
         border-right: 2px solid var(--purple);
         position: absolute;
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(45deg);
+        left: 32%;
+        transform: translate(0, -50%) rotate(45deg);
       }
 
       + .ajax-loader {
@@ -210,6 +206,10 @@
 
   @media (width <= 700px) {
     padding: 4rem 2rem 6rem 2rem;
+  }
+
+  @media (width <= 500px) {
+    padding: 4rem 3.5rem 6rem 3.5rem;
   }
 
   &__nav {
@@ -280,11 +280,6 @@
     .icon {
       width: 4rem;
       height: 4rem;
-
-      &--medium {
-        width: 3.9rem;
-        height: 3.9rem;
-      }
 
       .primary-path {
         transition: fill 0.7s var(--ease-out-quint);
