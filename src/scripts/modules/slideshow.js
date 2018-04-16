@@ -30,6 +30,7 @@ class Slideshow {
     this.$slides.removeClass('hidden')
     this.state.supported && this.sliceImages()
     this.$controls.on('click', this.onControlClick)
+    this.animateInAttributes(this.state.currentIndex)
     this.state.autoplay && this.play()
   }
 
@@ -139,7 +140,8 @@ class Slideshow {
         innerHTML += this.sliceTemplate(i, bgImage, top, clipPath, height)
       }
 
-      $slide.html(innerHTML)
+      $slide.remove('img')
+      $slide.prepend(innerHTML)
       $slide.addClass('enhanced')
     })
 
@@ -200,7 +202,13 @@ class Slideshow {
   }
 
   setSlide(index) {
-    this.$slides.each((i, el) => anime.remove(el))
+    this.$slides.each((i, el) => {
+      const attrEls = $(el)
+        .find('.js-attr-title, .js-attr-line')
+        .toArray()
+      anime.remove(attrEls)
+      anime.remove(el)
+    })
     return this[`${this.state.supported ? 'enhanced' : 'fallback'}Transition`](
       index,
     )
@@ -225,6 +233,7 @@ class Slideshow {
         delay: 500,
         easing: 'easeOutQuint',
       }).finished,
+      this.animateInAttributes(index),
     ]).then(() => this.toggleGlitch('stop'))
   }
 
@@ -245,6 +254,31 @@ class Slideshow {
         scale: [1.05, 1],
         duration: 700,
         easing: 'easeOutQuint',
+      }).finished,
+    ])
+  }
+
+  animateInAttributes(index) {
+    return Promise.all([
+      anime({
+        targets: this.$slides
+          .eq(index)
+          .find('.js-attr-line')
+          .toArray(),
+        scaleX: [0, 1],
+        easing: 'easeInOutQuint',
+        duration: 1000,
+        delay: 750,
+      }).finished,
+      anime({
+        targets: this.$slides
+          .eq(index)
+          .find('.js-attr-title')
+          .toArray(),
+        opacity: [0, 1],
+        easing: 'easeInOutQuint',
+        duration: 1000,
+        delay: 1000,
       }).finished,
     ])
   }

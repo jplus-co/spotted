@@ -20,24 +20,7 @@
             {% include 'text-block.twig' with { text_block: why.text_block } %}
           </div>
           <div class="section__column">
-            <div class="slideshow js-slideshow">
-              <div class="slideshow__slides">
-                <div class="slideshow__slide js-slideshow-slide hidden">
-                  <img src="{{site.theme.link}}/assets/images/celeb-01.png" alt="" class="slideshow__img">
-                </div>
-                <div class="slideshow__slide js-slideshow-slide hidden">
-                  <img src="{{site.theme.link}}/assets/images/celeb-02.png" alt="" class="slideshow__img">
-                </div>
-                <div class="slideshow__slide js-slideshow-slide hidden">
-                  <img src="{{site.theme.link}}/assets/images/celeb-03.png" alt="" class="slideshow__img">
-                </div>
-              </div>
-              <div class="slideshow__pagination">
-                {% include 'pagination-button.twig' with { title: '1' } %}
-                {% include 'pagination-button.twig' with { title: '2' } %}
-                {% include 'pagination-button.twig' with { title: '3' } %}
-              </div>
-            </div>
+            {% include 'slideshow.twig' with { slideshow: why.slideshow } %}
           </div>
         </div>
         <div class="section__row pt pb">
