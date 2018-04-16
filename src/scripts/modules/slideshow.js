@@ -1,9 +1,10 @@
 import $ from 'jquery'
 import anime from 'animejs'
+import Glitch from './glitch'
 import clipPathShapeSupport from '../util/clipPathShapeSupport'
 import gridLayoutSupport from '../util/gridLayoutSupport'
 import randomInt from '../util/randomInt'
-import Glitch from './glitch'
+import timeout from '../util/timeout'
 
 class Slideshow {
   constructor(opt = {}) {
@@ -12,7 +13,7 @@ class Slideshow {
     this.$controls = this.$container.find(opt.controls)
 
     this.totalSlices = 60
-    this.orientation = 'horizontal'
+    this.slideDuration = 5000
 
     this.state = {
       // supported: false,
@@ -25,10 +26,93 @@ class Slideshow {
   }
 
   init() {
+    $(this.inactiveSlides()).css('opacity', '0')
+    this.$slides.removeClass('hidden')
     this.state.supported && this.sliceImages()
     this.$controls.on('click', this.onControlClick)
+    this.state.autoplay && this.play()
+  }
 
-    $(this.inactiveSlides()).css('opacity', '0')
+  play = () => {
+    if (!this.state.autoplay) return
+
+    return this.progress(this.slideDuration)
+      .then(this.nextSlide)
+      .then(this.play)
+  }
+
+  progress = duration => {
+    const $el = this.$controls.eq(this.state.currentIndex)
+    this.outer = $el.find('.js-pagination-button-outer')[0]
+    this.inner = $el.find('.js-pagination-button-inner')[0]
+
+    return Promise.all([
+      anime({
+        targets: this.outer,
+        translateX: ['-100%', '0%'],
+        easing: 'linear',
+        duration,
+      }).finished,
+      anime({
+        targets: this.inner,
+        translateX: ['100%', '0%'],
+        easing: 'linear',
+        duration,
+      }).finished,
+    ])
+  }
+
+  animateOutProgress() {
+    anime.remove(this.outer)
+    anime.remove(this.inner)
+    return Promise.all([
+      anime({
+        targets: this.outer,
+        translateX: '100%',
+        easing: 'easeOutQuint',
+        duration: 700,
+      }).finished,
+      anime({
+        targets: this.inner,
+        translateX: '-100%',
+        easing: 'easeOutQuint',
+        duration: 700,
+      }).finished,
+    ])
+  }
+
+  animateInProgress() {
+    if (this.state.autoplay) return
+
+    const $el = this.$controls.eq(this.state.currentIndex)
+    const outer = $el.find('.js-pagination-button-outer')[0]
+    const inner = $el.find('.js-pagination-button-inner')[0]
+
+    return Promise.all([
+      anime({
+        targets: outer,
+        translateX: ['-100%', '0%'],
+        easing: 'easeOutQuint',
+        duration: 700,
+      }).finished,
+      anime({
+        targets: inner,
+        translateX: ['100%', '0%'],
+        easing: 'easeOutQuint',
+        duration: 700,
+      }).finished,
+    ]).then(() => {
+      this.outer = outer
+      this.inner = inner
+    })
+  }
+
+  nextSlide = () => {
+    if (!this.state.autoplay) return
+
+    this.setState({
+      currentIndex: (this.state.currentIndex + 1) % this.$slides.length,
+    })
   }
 
   inactiveSlides() {
@@ -95,7 +179,11 @@ class Slideshow {
 
   onControlClick = ev => {
     const $target = $(ev.target).closest('button')
-    this.setState({ currentIndex: $target.data('index') - 1 })
+    const newIndex = $target.data('index')
+
+    if (newIndex !== this.state.currentIndex) {
+      this.setState({ currentIndex: newIndex, autoplay: false })
+    }
   }
 
   setState(obj = {}) {
@@ -112,15 +200,17 @@ class Slideshow {
   }
 
   setSlide(index) {
+    this.$slides.each((i, el) => anime.remove(el))
     return this[`${this.state.supported ? 'enhanced' : 'fallback'}Transition`](
       index,
     )
   }
 
   enhancedTransition(index) {
-    this.$slides.each((i, el) => anime.remove(el))
     this.toggleGlitch()
     Promise.all([
+      this.animateOutProgress(),
+      this.animateInProgress(),
       anime({
         targets: this.inactiveSlides(),
         opacity: 0,
@@ -139,19 +229,24 @@ class Slideshow {
   }
 
   fallbackTransition(index) {
-    this.$slides.each((i, el) => anime.remove(el))
-    anime({
-      targets: this.inactiveSlides(),
-      opacity: 0,
-      duration: 500,
-      easing: 'easeOutQuint',
-    })
-    anime({
-      targets: this.$slides.eq(index)[0],
-      opacity: [0, 1],
-      duration: 500,
-      easing: 'easeOutQuint',
-    })
+    return Promise.all([
+      this.animateOutProgress(),
+      this.animateInProgress(),
+      anime({
+        targets: this.inactiveSlides(),
+        opacity: 0,
+        scale: 0.95,
+        duration: 700,
+        easing: 'easeOutQuint',
+      }).finished,
+      anime({
+        targets: this.$slides.eq(index)[0],
+        opacity: [0, 1],
+        scale: [1.05, 1],
+        duration: 700,
+        easing: 'easeOutQuint',
+      }).finished,
+    ])
   }
 }
 
