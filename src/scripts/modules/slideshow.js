@@ -1,10 +1,11 @@
 import $ from 'jquery'
 import anime from 'animejs'
-import Glitch from './glitch'
 import clipPathShapeSupport from '../util/clipPathShapeSupport'
 import gridLayoutSupport from '../util/gridLayoutSupport'
 import randomInt from '../util/randomInt'
 import timeout from '../util/timeout'
+import TextScramble from './text-scramble'
+import Glitch from './glitch'
 
 class Slideshow {
   constructor(opt = {}) {
@@ -26,11 +27,11 @@ class Slideshow {
   }
 
   init() {
-    $(this.inactiveSlides()).css('opacity', '0')
+    $(this.$slides).css('opacity', '0')
     this.$slides.removeClass('hidden')
     this.state.supported && this.sliceImages()
     this.$controls.on('click', this.onControlClick)
-    this.animateInAttributes(this.state.currentIndex)
+    this.animateIn(this.state.currentIndex)
     this.state.autoplay && this.play()
   }
 
@@ -157,8 +158,8 @@ class Slideshow {
           glitchStart: { min: 100, max: 2500 },
           glitchState: { min: 50, max: 100 },
           glitchTotalIterations: 5,
-          glitchStateProperty: 'top',
-          glitchStateValue: () => randomInt(-1 * dim * 0.5, dim * 0.5) + 'px',
+          glitchStateProperty: 'left',
+          glitchStateValue: () => `${randomInt(-1 * dim, dim * 0.5)}px`,
           glitchStateValueReset: '0px',
         }),
       )
@@ -255,6 +256,7 @@ class Slideshow {
         duration: 700,
         easing: 'easeOutQuint',
       }).finished,
+      this.animateInAttributes(index),
     ])
   }
 
@@ -276,11 +278,25 @@ class Slideshow {
           .find('.js-attr-title')
           .toArray(),
         opacity: [0, 1],
-        easing: 'easeInOutQuint',
+        easing: 'easeInOutCubic',
         duration: 1000,
         delay: 1000,
       }).finished,
     ])
+  }
+
+  animateIn(index) {
+    this.state.supported && this.toggleGlitch()
+    Promise.all([
+      anime({
+        targets: this.$slides.eq(index)[0],
+        opacity: [0, 1],
+        duration: 1000,
+        delay: 500,
+        easing: 'easeOutQuint',
+      }).finished,
+      this.animateInAttributes(index),
+    ]).then(() => this.state.supported && this.toggleGlitch('stop'))
   }
 }
 
