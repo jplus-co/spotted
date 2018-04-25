@@ -7,3 +7,17 @@ precss -> autoprefixer -> cssnano
 @import 'layouts/index.css';
 @import 'partials/index.css';
 @import 'util/index.css';
+
+.io {
+  opacity: 0;
+  transform-origin: top;
+  transform: translate3d(0, 3rem, 0) scaleY(1.25);
+  transition: transform 0.8s var(--ease-out-quint),
+    opacity 0.8s var(--ease-out-quint);
+  will-change: transform, opacity;
+
+  &.shown {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,26 +1,15 @@
-<section class="hero">
+<section class="hero" {% if hero.image %}style="background-image: url({{Image(hero.image).src}})"{% endif %}>
   <div class="hero__inner-wrapper">
     {% if hero.heading %}
-      <h1 class="hero__heading">{{hero.heading}}</h1>
+      <h1 class="hero__heading io">{{hero.heading}}</h1>
     {% endif %}
     {% if hero.body %}
-      <div class="hero__body">{{hero.body}}</div>
+      <div class="hero__body io">{{hero.body}}</div>
     {% endif %}
-    {% if hero.button_type == 'link' %}
-      <a
-        class="button js-button"
-        href="{{hero.link.url}}"
-        target="{{hero.link.target}}"
-      >
-        <span>{{hero.link.title}}</span>
-      </a>
-    {% elseif hero.button_type == 'toggle' %}
-      <a
-        class="button js-button js-form-toggle"
-        href="#contact"
-      >
-        <span>{{hero.toggle_label}}</span>
-      </a>
-    {% endif %}
+    {% include 'button.twig' with {
+      button_type: hero.button_type,
+      link: hero.link,
+      toggle_label: hero.toggle_label,
+    } %}
   </div>
 </section>

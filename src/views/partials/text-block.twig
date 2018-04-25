@@ -1,9 +1,9 @@
 <div class="text-block">
   {% if text_block.heading %}
-    <h2 class="text-block__heading">{{text_block.heading}}</h2>
+    <h2 class="text-block__heading io">{{text_block.heading}}</h2>
   {% endif %}
   {% if text_block.body %}
-    <div class="text-block__body">{{text_block.body}}</div>
+    <div class="text-block__body io">{{text_block.body}}</div>
   {% endif %}
   {% if not no_button %}
     {% include 'button.twig' with {

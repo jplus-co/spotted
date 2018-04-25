@@ -9,12 +9,9 @@
   "dependencies": {
     "animejs": "^2.2.0",
     "barba.js": "^1.0.0",
-    "dom-css": "^2.1.0",
-    "dom-select": "^1.1.1",
     "domready": "^1.0.8",
     "fastclick": "^1.0.6",
     "jquery": "^3.3.1",
-    "smooth-scrolling": "^2.3.9",
     "sniffer": "github:watsondg/sniffer",
     "tachyons": "^4.9.1"
   },

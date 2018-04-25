@@ -3,7 +3,7 @@
 <head>
 	{% include 'html-head.twig' %}
 </head>
-<body class="no-tab">
+<body class="no-tab is-loading">
 
 	<noscript>
 		{% include 'noscript.twig' %}
@@ -23,7 +23,8 @@
 		APP.THEME_URL = '{{site.theme.uri}}'
 		APP.AJAX_URL = '{{fn('admin_url', 'admin-ajax.php')}}'
 	</script>
+	<script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
   <script src="{{site.theme.link}}/static/bundle.js" defer></script>
-	{{ wp_footer }}
+	{{wp_footer}}
 </body>
 </html>

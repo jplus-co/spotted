@@ -1,12 +1,12 @@
 <section class="newsletter-form">
-  <div class="newsletter-form__inner-wrapper">
+  <div class="newsletter-form__inner-wrapper io">
     {% filter shortcodes %}
       [contact-form-7 id="168" title="Email Newsletter"]
     {% endfilter %}
   </div>
 </section>
 <footer class="footer">
-  <nav class="footer__nav">
+  <nav class="footer__nav io">
     {% for item in footer_nav.get_items %}
       <a
         class="footer__nav-link"
@@ -22,7 +22,7 @@
       </a>
     {% endfor %}
   </nav>
-  <ul class="footer__social">
+  <ul class="footer__social io">
     <li class="footer__social-item">
       <a class="footer__social-link" href="/" target="_blank" rel="noopener">
         {% include 'icon-facebook.twig' %}
@@ -34,5 +34,5 @@
       </a>
     </li>
   </ul>  
-  <p class="footer__copyright">© Spotted. All Rights Reserved.</p>
+  <p class="footer__copyright io">© Spotted. All Rights Reserved.</p>
 </footer>

@@ -8,4 +8,8 @@
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--purple);
+
+  @media (width <= 960px) {
+    font-size: 2.4rem;
+  }
 }

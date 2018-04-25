@@ -17,8 +17,8 @@ class Slideshow {
     this.slideDuration = 5000
 
     this.state = {
-      // supported: false,
       supported: clipPathShapeSupport() && gridLayoutSupport(),
+      // supported: false,
       currentIndex: 0,
       autoplay: true,
     }

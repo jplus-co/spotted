@@ -4,37 +4,37 @@
 {% set why = post.get_field('why_block') %}
 {% set products = post.get_field('products_block') %}
 {% set brands = post.get_field('brands_block') %}
+{% set news = post.get_field('news_block') %}
 
 {% block content %}
 
   <div class="barba-container" data-namespace="home">
     <main class="content">
       {% include 'hero.twig' with hero %}
-
       <section class="section">
         <aside class="section__aside">
           <h2 class="section__sticky-label">{{why.section_label}}</h2>
         </aside>
-        <div class="section__row pt pb">
-          <div class="section__column black">
-            {% include 'text-block.twig' with { text_block: why.text_block } %}
-          </div>
+        <div class="section__row flex flex-row-l flex-column-reverse pt pb">
           <div class="section__column">
-            {% include 'slideshow.twig' with { slideshow: why.slideshow } %}
+            {% include 'text-block.twig' with {text_block: why.text_block} %}
+          </div>
+          <div class="section__column ">
+            {% include 'slideshow.twig' with {slideshow: why.slideshow} %}
           </div>
         </div>
         <div class="section__row pt pb">
-          <div class="lede">{{ why.lede }}</div>
+          <div class="lede io">{{ why.lede }}</div>
         </div>
-        <ul class="list section__row flex-wrap pb">
+        <ul class="list section__row flex flex-wrap pb">
           {% for item in why.list %}
-            <li class="list__item flex w-50">
-              <div class="w-25">
+            <li class="list__item flex w-50-ns">
+              <div class="w-25 io">
                 <img src="{{Image(item.icon).src}}" alt="{{Image(item.icon).alt}}">
               </div>
               <div class="w-75">
-                <h3 class="list__heading">{{item.heading}}</h3>
-                <div class="list__body">{{item.body}}</div>
+                <h3 class="list__heading io">{{item.heading}}</h3>
+                <div class="list__body io">{{item.body}}</div>
               </div>
             </li>
           {% endfor %}
@@ -42,12 +42,21 @@
       </section>
 
       <section class="section">
-        <div class="bg-black pb">
-          <aside class="section__aside">
-            <h2 class="section__sticky-label">{{products.section_label}}</h2>
-          </aside>
-          <div class="section__row pt pb">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{products.section_label}}</h2>
+        </aside>
+        <div class="section__inner relative bg-black pb ph">
+          <div class="section__row flex-l pt pb">
             <div class="section__column">
+              <div class="section__images">
+              {% for image in products.images %}
+                <div class="section__image io-img">
+                  <div class="section__image-wrapper">
+                    <img src="{{Image(image.id).src}}" alt="{{Image(image.id).alt}}">
+                  </div>
+                </div>
+              {% endfor %}
+              </div>
             </div>
             <div class="section__column white">
               {% include 'text-block.twig' with { text_block: products.text_block } %}
@@ -60,46 +69,64 @@
         <aside class="section__aside">
           <h2 class="section__sticky-label">{{brands.section_label}}</h2>
         </aside>
-        <div class="section__row pt">
+        <div class="section__row flex pt">
           <div class="section__column black">
-            {% include 'text-block.twig' with { text_block: brands.text_block, no_button: true } %}
+            {% include 'text-block.twig' with {
+              text_block: brands.text_block,
+              no_button: true
+            } %}
           </div>
         </div>
-        <ul class="list brand-list section__row flex-wrap items-center">
-          {% for brand in brands.brand_list %}
-            {% set logo = Image(brand.logo) %}
-            <li class="brand-list__item{{ logo.width / logo.height < 3 ? ' brand-list__item--tall' }}">
-              <img src="{{logo.src}}" alt="{{brand.name}}">
-            </li>
-          {% endfor %}
-        </ul>
+        <div class="brands section__row">
+          <ul class="brands__list list flex flex-wrap items-center">
+            {% for brand in brands.brand_list %}
+              {% set logo = Image(brand.logo) %}
+              <li class="brands__item{{ logo.width / logo.height < 3 ? ' brands__item--tall' }}">
+                <img src="{{logo.src}}" alt="{{brand.name}}" class="io">
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
         <div class="section__row">
+          <div class="side-scroll-cta">
+            <span class="arrow">⟵</span>
+            <span class="label">Scroll</span>
+            <span class="arrow">⟶</span>
+          </div>
           {% include 'button.twig' with {
             button_type: brands.text_block.button_type,
             link: brands.text_block.link,
             toggle_label: brands.text_block.toggle_label,
           } %}
         </div>
-        <div class="section__row items-start pb pr5">
-          <img src="{{site.theme.link}}/assets/images/curve-01@2x.png" alt="Light Blue Bezier Curve">
+        <div class="section__row flex items-start pr5-ns">
+          <img src="{{site.theme.link}}/assets/images/curve-01@2x.png" alt="Light Blue Bezier Curve" class="curve io">
         </div>
         <div class="section__row pb">
           <blockquote class="testimonial">
-            <div class="testimonial__quote">
+            <div class="testimonial__quote io">
               <img src="{{site.theme.link}}/assets/images/open-quote@2x.png" alt="Open Quote">
             </div>
-            <p class="testimonial__content">
+            <p class="testimonial__content io">
               {{brands.featured_testimonial.quote}}
             </p>
-            <p class="testimonial__title">
+            <p class="testimonial__title io">
               {{brands.featured_testimonial.title}}
             </p>
           </blockquote>
         </div>
       </section>
-      <div class="bg-gray-blue white tc" style="height: 30rem; padding: 7.2rem 0;">
-        <div class="text-block__heading">
-          Spotted in the news
+      {# style="height: 30rem; padding: 7.2rem 0;" #}
+      <div class="bg-gray-blue white tc pt5 pb6-l pb5">
+        <div class="text-block__heading pb5 io">
+          {{news.heading}}
+        </div>
+        <div class="section__row flex-l justify-center pb2 tc">
+          {% for publication in news.publications %}
+            <div class="h3-ns h2 ph5 mb0-l mb5 io">
+              <img src="{{Image(publication.logo).src}}" alt="{{publication.name}}" class="h-100 w-auto">
+            </div>
+          {% endfor %}
         </div>
       </div>
     </main>
