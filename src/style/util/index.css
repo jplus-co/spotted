@@ -35,3 +35,15 @@
     padding-left: 2rem;
   }
 }
+
+.mb {
+  margin-bottom: 7.5rem;
+
+  @media (width <= 30em) {
+    margin-bottom: 4rem;
+  }
+}
+
+.push-up {
+  margin-top: -5rem;
+}

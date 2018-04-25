@@ -44,6 +44,10 @@
     @media (width <= 700px) {
       font-size: 4rem;
     }
+
+    [data-namespace='about'] & {
+      color: var(--black);
+    }
   }
 
   &__body {
@@ -60,6 +64,10 @@
 
     * {
       margin: 0;
+    }
+
+    [data-namespace='about'] & {
+      color: var(--black);
     }
   }
 }

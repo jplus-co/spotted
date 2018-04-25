@@ -78,7 +78,7 @@
     &:nth-child(1) {
       width: 40%;
       top: 10%;
-      left: -2rem;
+      left: -3.5rem;
 
       @media (width <= 60em) {
         top: 0;
