@@ -10,9 +10,14 @@ class Framework {
   constructor(app) {
     this.app = app
 
+    this.setup()
     this.detect()
     this.addEvents()
     this.initBarba()
+  }
+
+  setup() {
+    history.scrollRestoration = 'manual'
   }
 
   detect() {

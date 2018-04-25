@@ -10,7 +10,7 @@ class App {
 
     this.header = new Header($('.js-header'))
     this.io = new IntersectionObserver(this.onIntersection, {
-      threshold: 0.5,
+      threshold: 0.0,
     })
 
     this.buttons = []
