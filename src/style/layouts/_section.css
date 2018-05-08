@@ -2,23 +2,19 @@
   position: relative;
   width: 100%;
   padding: 0 7.5rem 0 3.5rem;
-
-  @media (width <= 700px) {
+  @media (width <=700px) {
     padding: 0 2rem;
   }
-
   &__aside {
     position: absolute;
     top: 0;
     right: 3.5rem;
     bottom: 0;
     width: 1.6rem;
-
-    @media (width <= 1180px) {
+    @media (width <=1180px) {
       display: none;
     }
   }
-
   &__sticky-label {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 1.6rem;
@@ -29,87 +25,76 @@
     writing-mode: vertical-rl;
     padding: 3.5rem 0;
     margin: 0;
-    /* the sauce */
     position: sticky;
     top: var(--header-height);
+    transition: transform 0.8s var(--ease-out-quint);
+    transform: translateY(200%);
+    .section__aside.shown & {
+      display: block;
+      transform: none;
+    }
   }
-
   &__inner {
-    @media (width <= 30em) {
+    @media (width <=30em) {
       margin-right: -2rem;
       margin-left: -2rem;
     }
   }
-
   &__row {
     width: 100%;
     max-width: 110rem;
     margin: 0 auto;
   }
-
   &__column {
     flex: 1;
     margin: 0 3rem;
-
-    @media (width <= 60em) {
+    @media (width <=60em) {
       margin: 0 0 4rem 0;
     }
-
-    @media (width <= 30em) {
+    @media (width <=30em) {
       margin: 0 0 2rem 0;
     }
-
     &:nth-child(odd) {
       margin-left: 0;
     }
-
     &:nth-child(even) {
       margin-right: 0;
     }
   }
-
   &__image {
     position: absolute;
-
-    @media (width <= 60em) {
+    @media (width <=60em) {
       position: relative;
     }
-
     &:nth-child(1) {
       width: 40%;
       top: 10%;
       left: -3.5rem;
-
-      @media (width <= 60em) {
+      @media (width <=60em) {
         top: 0;
         width: 70%;
         margin-left: -5%;
       }
-
-      @media (width <= 50em) {
+      @media (width <=50em) {
         width: 90%;
         margin-left: -10%;
       }
     }
-
     &:nth-child(2) {
       width: 32%;
       top: 30vw;
       left: 16%;
-
-      @media (width <= 60em) {
+      @media (width <=60em) {
         top: 0;
         width: 50%;
         margin-top: -5%;
       }
-
-      @media (width <= 50em) {
+      @media (width <=50em) {
         width: 60%;
         left: 25%;
       }
     }
   }
-
   &__image-wrapper {
     width: 100%;
     height: 100%;
@@ -117,10 +102,8 @@
     transform: translate3d(0, 100%, 0);
     opacity: 0;
     will-change: transform, opacity;
-    transition: transform 0.8s var(--ease-out-quart),
-      opacity 0.8s var(--ease-out-quart);
+    transition: transform 0.8s var(--ease-out-quart), opacity 0.8s var(--ease-out-quart);
     transition-delay: 0.1s;
-
     img {
       width: 100%;
       height: auto;
@@ -129,11 +112,9 @@
       transition: transform 0.8s var(--ease-out-quart);
       transition-delay: 0.1s;
     }
-
     .section__image.shown & {
       opacity: 1;
       transform: none;
-
       img {
         transform: none;
       }
