@@ -55,7 +55,7 @@
     font-size: 1.8rem;
     line-height: 1.33;
     color: var(--white);
-    max-width: 48rem;
+    max-width: 54rem;
     margin: 0 0 4rem 0;
 
     @media (width <= 700px) {

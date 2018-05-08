@@ -1,0 +1,24 @@
+{% extends 'base.twig' %}
+
+{% set hero = post.get_field('hero') %}
+{# {% set why = post.get_field('why_block') %}
+{% set products = post.get_field('products_block') %}
+{% set brands = post.get_field('brands_block') %}
+{% set news = post.get_field('news_block') %} #}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="home">
+    <main class="content">
+      {% include 'hero.twig' with hero %}
+      <section class="section">
+        <div class="section__row pt pb ph">
+          <div class="lede ph io">determine the value of the celebrities who naturally 
+endorse your brand and make confident celebrity-related 
+decisions based on verified insights.</div>
+        </div>
+      </section>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}
