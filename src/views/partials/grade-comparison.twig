@@ -1,0 +1,24 @@
+<div class="grade-comparison io-grade-comparison{{ classes ? ' ' ~ classes }}">
+  {% for item in section_two.grade_comparison %}
+    <div class="grade-comparison__item">
+      <div class="grade-comparison__item__image-wrap">
+        <img
+          class="grade-comparison__item__image"
+          src="{{Image(item.image).src}}"
+          alt="{{Image(item.image).alt}}"
+        >
+      </div>
+      <svg class="grade-comparison__item__svg">
+        <circle class="grade-comparison__item__circle" />
+      </svg>
+      <div class="grade-comparison__item__grade-wrap">
+        <p class="grade-comparison__item__grade">{{item.grade}}</p>
+      </div>
+    </div>
+    {% if loop.index == 1 %}
+      <div class="grade-comparison__or">
+        <p>or</p>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

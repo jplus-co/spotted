@@ -39,7 +39,7 @@ class App {
       .map(el => new Button($(el)))
 
     this.targets.forEach(el => this.io.unobserve(el))
-    this.targets = $('.io, .io-img, .io-aside').toArray()
+    this.targets = $('.io, .io-img, .io-grade-comparison').toArray()
     this.targets.forEach(el => this.io.observe(el))
   }
 }

@@ -27,12 +27,6 @@
     margin: 0;
     position: sticky;
     top: var(--header-height);
-    transition: transform 0.8s var(--ease-out-quint);
-    transform: translateY(200%);
-    .section__aside.shown & {
-      display: block;
-      transform: none;
-    }
   }
   &__inner {
     @media (width <=30em) {
@@ -102,7 +96,8 @@
     transform: translate3d(0, 100%, 0);
     opacity: 0;
     will-change: transform, opacity;
-    transition: transform 0.8s var(--ease-out-quart), opacity 0.8s var(--ease-out-quart);
+    transition: transform 0.8s var(--ease-out-quart),
+      opacity 0.8s var(--ease-out-quart);
     transition-delay: 0.1s;
     img {
       width: 100%;
