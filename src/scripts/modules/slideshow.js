@@ -1,3 +1,4 @@
+import Component from '../framework/component'
 import $ from 'jquery'
 import anime from 'animejs'
 import clipPathShapeSupport from '../util/clipPathShapeSupport'
@@ -7,8 +8,10 @@ import timeout from '../util/timeout'
 import TextScramble from './text-scramble'
 import Glitch from './glitch'
 
-class Slideshow {
+class Slideshow extends Component {
   constructor(opt = {}) {
+    super()
+
     this.$container = $(opt.container)
     this.$slides = this.$container.find(opt.slides)
     this.$controls = this.$container.find(opt.controls)
@@ -18,12 +21,9 @@ class Slideshow {
 
     this.state = {
       supported: clipPathShapeSupport() && gridLayoutSupport(),
-      // supported: false,
       currentIndex: 0,
-      autoplay: true,
+      playing: true,
     }
-
-    this.init()
   }
 
   init() {
@@ -32,11 +32,16 @@ class Slideshow {
     this.state.supported && this.sliceImages()
     this.$controls.on('click', this.onControlClick)
     this.animateIn(this.state.currentIndex)
-    this.state.autoplay && this.play()
+    this.state.playing && this.play()
+  }
+
+  destroy() {
+    this.$controls.off('click', this.onControlClick)
+    this.state.playing && this.setState({ playing: false })
   }
 
   play = () => {
-    if (!this.state.autoplay) return
+    if (!this.state.playing) return
 
     return this.progress(this.slideDuration)
       .then(this.nextSlide)
@@ -84,7 +89,7 @@ class Slideshow {
   }
 
   animateInProgress() {
-    if (this.state.autoplay) return
+    if (this.state.playing) return
 
     const $el = this.$controls.eq(this.state.currentIndex)
     const outer = $el.find('.js-pagination-button-outer')[0]
@@ -110,7 +115,7 @@ class Slideshow {
   }
 
   nextSlide = () => {
-    if (!this.state.autoplay) return
+    if (!this.state.playing) return
 
     this.setState({
       currentIndex: (this.state.currentIndex + 1) % this.$slides.length,
@@ -185,14 +190,8 @@ class Slideshow {
     const newIndex = $target.data('index')
 
     if (newIndex !== this.state.currentIndex) {
-      this.setState({ currentIndex: newIndex, autoplay: false })
+      this.setState({ currentIndex: newIndex, playing: false })
     }
-  }
-
-  setState(obj = {}) {
-    const oldState = this.state
-    this.state = Object.assign({}, this.state, obj)
-    this.didUpdate(oldState)
   }
 
   didUpdate(oldState) {

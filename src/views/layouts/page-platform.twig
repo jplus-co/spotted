@@ -8,11 +8,11 @@
 
 {% block content %}
 
-  <div class="barba-container" data-namespace="home">
+  <div class="barba-container" data-namespace="platform">
     <main class="content">
       {% include 'hero.twig' with hero %}
       <section class="section">
-        <div class="section__row pt pb ph">
+        <div class="section__row pt5 pb ph">
           <div class="lede ph io">{{post.get_field('intro_lede').lede}}</div>
         </div>
       </section>

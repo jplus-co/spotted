@@ -63,12 +63,17 @@ class Framework {
     typeof this.app.onResize === 'function' &&
       this.app.onResize(config.windowWidth, config.windowHeight)
 
-    // Propogate window resize event through Barba views
-    views.map(
-      view =>
-        typeof view.onResize === 'function' &&
-        view.onResize(config.windowWidth, config.windowHeight),
-    )
+    // Propogate window resize event to current view
+    views
+      .filter(
+        view =>
+          view.namespace === Barba.HistoryManager.currentStatus().namespace,
+      )
+      .map(
+        view =>
+          typeof view.onResize === 'function' &&
+          view.onResize(config.windowWidth, config.windowHeight),
+      )
   }
 
   onNewPageReady = (currentStatus, prevStatus, container, html) => {
@@ -82,7 +87,7 @@ class Framework {
     // add 'current-menu-item' to any parent menu items
     $link.closest('.js-dropdown').addClass('current-menu-item')
     // add `is-${namespace}` class to body for current view
-    this.updateBodyClass()
+    this.updateBodyClass(currentStatus, prevStatus)
     // Propogate event through app
     typeof this.app.onNewPageReady === 'function' &&
       this.app.onNewPageReady(currentStatus, prevStatus, container, html)
@@ -92,19 +97,17 @@ class Framework {
     $(config.html).css({ pointerEvents: 'none' })
   }
 
-  onTransitionCompleted() {
+  onTransitionCompleted = () => {
     $(config.html).css({ pointerEvents: 'auto' })
+
+    this.onResize()
   }
 
-  updateBodyClass() {
-    $(config.body).addClass(
-      `is-${Barba.Pjax.History.currentStatus().namespace}`,
-    )
+  updateBodyClass(currentStatus, prevStatus) {
+    $(config.body).addClass(`is-${currentStatus.namespace}`)
 
-    if (Barba.Pjax.History.prevStatus()) {
-      $(config.body).removeClass(
-        `is-${Barba.Pjax.History.prevStatus().namespace}`,
-      )
+    if (prevStatus) {
+      $(config.body).removeClass(`is-${prevStatus.namespace}`)
     }
   }
 }
