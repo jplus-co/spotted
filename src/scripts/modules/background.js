@@ -10,6 +10,8 @@ class Background extends Component {
     this.template = opt.template
 
     this.radius = opt.radius || 200
+    this.rafId = null
+    this.destroyed = false
 
     this.state = {
       elementCount: 0,
@@ -20,8 +22,14 @@ class Background extends Component {
 
   init() {
     this.onResize()
-    window.requestAnimationFrame(this.loop)
+    this.rafId = window.requestAnimationFrame(this.loop)
     $(document).on('mousemove', this.onMove)
+  }
+
+  destroy() {
+    $(document).off('mousemove', this.onMove)
+    window.cancelAnimationFrame(this.rafId)
+    this.destroyed = true
   }
 
   onMove = ev => {
@@ -32,6 +40,8 @@ class Background extends Component {
   }
 
   loop = () => {
+    if (this.destroyed) return
+
     const { mouseX, mouseY } = this.state
     this.$children.each((i, el) => {
       const $el = $(el)
@@ -48,7 +58,8 @@ class Background extends Component {
         $el.css({ opacity: 0.4 })
       }
     })
-    window.requestAnimationFrame(this.loop)
+
+    this.rafId = window.requestAnimationFrame(this.loop)
   }
 
   onResize() {

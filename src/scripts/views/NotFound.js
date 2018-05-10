@@ -17,7 +17,9 @@ const NotFound = Barba.BaseView.extend({
 
   onEnterCompleted() {},
 
-  onLeave() {},
+  onLeave() {
+    this.background.destroy()
+  },
 
   onLeaveCompleted() {},
 
