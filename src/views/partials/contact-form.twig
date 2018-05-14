@@ -1,0 +1,12 @@
+<div class="contact-form js-contact-form">
+  <div class="contact-form__outer-wrapper">
+    <div class="contact-form__inner-wrapper">
+      {% filter shortcodes %}
+        {{shortcode}}
+      {% endfilter %}
+      <button class="contact-form__close-button js-contact-form-close-button">
+        <div class="contact-form__close-button__icon"></div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,8 @@
 		{% endblock %}
 	</div>
 
+	{% include 'contact-form.twig' with { shortcode: options.contact_form_shortcode } %}
+
 	<script>
 		window.APP = window.APP || {}
 		APP.BASE_URL = '{{site.url}}'

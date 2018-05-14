@@ -1,6 +1,8 @@
+import Barba from 'barba.js'
 import $ from 'jquery'
 import config from './config'
 import Header from './modules/header'
+import ContactForm from './modules/contact-form'
 import Button from './modules/button'
 
 class App {
@@ -9,6 +11,10 @@ class App {
     this.$nav = $('.js-nav')
 
     this.header = new Header($('.js-header'))
+    this.contactForm = new ContactForm({
+      el: '.js-contact-form',
+      closeButton: '.js-contact-form-close-button',
+    })
     this.io = new IntersectionObserver(this.onIntersection, {
       threshold: 0.0,
     })
@@ -17,6 +23,12 @@ class App {
     this.targets = []
 
     $(config.body).removeClass('is-loading')
+
+    this.addEvents()
+  }
+
+  addEvents() {
+    $(document).on('click', '.js-form-toggle', this.onFormToggleClick)
   }
 
   onIntersection = (entries, observer) => {
@@ -41,6 +53,14 @@ class App {
     this.targets.forEach(el => this.io.unobserve(el))
     this.targets = $('.io, .io-img, .io-grade-comparison, .io-grade').toArray()
     this.targets.forEach(el => this.io.observe(el))
+  }
+
+  onFormToggleClick(ev) {
+    ev.preventDefault()
+    const message = $(this)
+      .attr('href')
+      .slice(2)
+    Barba.Dispatcher.trigger(message)
   }
 }
 

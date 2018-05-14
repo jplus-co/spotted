@@ -68,13 +68,22 @@ class SpottedSite extends TimberSite {
 			'icon_url'     => 'dashicons-no',
 			'redirect'     => false
 		));
+
+		acf_add_options_page(array(
+			'page_title'   => 'Form Options',
+			'menu_title'   => 'Form Options',
+			'menu_slug'    => 'spotted_form_options',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-feedback',
+			'redirect'     => false
+		));
 	}
 
 	function add_to_context( $context ) {
 		$context['primary_nav'] = new TimberMenu('Primary Navigation');
 		$context['footer_nav'] = new TimberMenu('Footer Navigation');
 		$context['site'] = $this;
-		// $context['options'] = get_fields('option');
+		$context['options'] = get_fields('option');
 		return $context;
 	}
 
