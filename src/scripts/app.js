@@ -2,7 +2,7 @@ import Barba from 'barba.js'
 import $ from 'jquery'
 import config from './config'
 import Header from './modules/header'
-import ContactForm from './modules/contact-form'
+import Form from './modules/form'
 import Button from './modules/button'
 
 class App {
@@ -11,10 +11,15 @@ class App {
     this.$nav = $('.js-nav')
 
     this.header = new Header($('.js-header'))
-    this.contactForm = new ContactForm({
-      el: '.js-contact-form',
-      closeButton: '.js-contact-form-close-button',
+
+    const formNames = ['contact', 'modal']
+    formNames.forEach((name) => {
+      this[`${name}Form`] = new Form({
+        el: `.js-${name}-form`,
+        closeButton: `.js-${name}-form-close-button`,
+      })
     })
+
     this.io = new IntersectionObserver(this.onIntersection, {
       threshold: 0.0,
     })

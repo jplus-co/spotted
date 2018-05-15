@@ -2,12 +2,13 @@ import Component from '../framework/component'
 import Barba from 'barba.js'
 import $ from 'jquery'
 
-class ContactForm extends Component {
+class Form extends Component {
   constructor(opt = {}) {
     super()
 
     this.$el = $(opt.el)
     this.$closeButton = $(opt.closeButton)
+    this.name = opt.name
 
     this.state = {
       shown: false,
@@ -26,8 +27,10 @@ class ContactForm extends Component {
     }))
 
     this.$el.on('click', (ev) => {
+      if (!this.state.shown) return
+
       const $target = $(ev.target)
-      if ($target.closest('.contact-form__outer-wrapper').length) {
+      if ($target.closest(`.${this.name}-form__outer-wrapper`).length) {
         ev.stopPropagation()
         return
       }
@@ -44,11 +47,10 @@ class ContactForm extends Component {
 
       if (this.state.shown) {
         const firstInput = this.$el.find('input:not([type="hidden"])').first()[0]
-        firstInput.tabIndex = -1
         firstInput.focus()
       }
     }
   }
 }
 
-export default ContactForm
+export default Form
