@@ -1,4 +1,4 @@
-<div class="text-block">
+<div class="text-block{{ classes ? ' ' ~ classes }}">
   {% if text_block.heading %}
     <h2 class="text-block__heading io">{{text_block.heading}}</h2>
   {% endif %}

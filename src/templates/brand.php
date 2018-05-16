@@ -1,8 +1,8 @@
 <?php
 
-/* Template Name: Brand Landing Page Template */
+/* Template Name: Brand Template */
 
 $context = Timber::get_context();
 $context['post'] = new TimberPost();
 
-Timber::render('page.twig', $context);
+Timber::render('brand-template.twig', $context);

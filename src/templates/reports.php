@@ -1,6 +1,6 @@
 <?php
 
-/* Template Name: Reports Landing Page Template */
+/* Template Name: Reports Template */
 
 $context = Timber::get_context();
 $context['post'] = new TimberPost();

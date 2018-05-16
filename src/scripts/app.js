@@ -13,11 +13,9 @@ class App {
     this.header = new Header($('.js-header'))
 
     const formNames = ['contact', 'modal']
-    formNames.forEach((name) => {
-      this[`${name}Form`] = new Form({
-        el: `.js-${name}-form`,
-        closeButton: `.js-${name}-form-close-button`,
-      })
+    formNames.map((name) => {
+      this[`${name}Form`] = new Form(name)
+      console.log(this[`${name}Form`])
     })
 
     this.io = new IntersectionObserver(this.onIntersection, {
@@ -65,6 +63,7 @@ class App {
     const message = $(this)
       .attr('href')
       .slice(2)
+    console.log(message)
     Barba.Dispatcher.trigger(message)
   }
 }

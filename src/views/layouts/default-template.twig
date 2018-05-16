@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="default-template">
+    <main class="default-template">
+      <h1 class="default-template__title io">{{post.title}}</h1>
+      <div class="default-template__content io">
+        {{post.content}}
+      </div>
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

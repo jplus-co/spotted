@@ -38,9 +38,10 @@ class SpottedSite extends TimberSite {
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
 		add_filter( 'nav_menu_css_class', array( $this, 'special_nav_class' ), 10, 2 );
+		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
 
 		add_action( 'init', array( $this, 'add_custom_options_page' ) );
-		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
+		add_action('admin_head', array( $this, 'remove_add_media_buttons' ) );
 		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
 		add_action( 'admin_head', array( $this, 'customize_page_meta_boxes' ) );
 
@@ -138,7 +139,12 @@ class SpottedSite extends TimberSite {
 				}
 			</style>
 		';
-	}   
+	}
+
+	/* Remove add media buttons for all users */
+	function remove_add_media_buttons() {
+		remove_action( 'media_buttons', 'media_buttons' );
+	}
 }
 
 new SpottedSite();

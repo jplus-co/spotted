@@ -3,12 +3,12 @@ import Barba from 'barba.js'
 import $ from 'jquery'
 
 class Form extends Component {
-  constructor(opt = {}) {
+  constructor(name) {
     super()
 
-    this.$el = $(opt.el)
-    this.$closeButton = $(opt.closeButton)
-    this.name = opt.name
+    this.name = name
+    this.$el = $(`.js-${this.name}-form`)
+    this.$closeButton = $(`.js-${this.name}-form-close-button`)
 
     this.state = {
       shown: false,
@@ -18,7 +18,7 @@ class Form extends Component {
   }
 
   init() {
-    Barba.Dispatcher.on('contact', () => this.setState({
+    Barba.Dispatcher.on(this.name, () => this.setState({
       shown: !this.state.shown,
     }))
 
