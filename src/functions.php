@@ -44,22 +44,22 @@ class SpottedSite extends TimberSite {
 		add_action('admin_head', array( $this, 'remove_add_media_buttons' ) );
 		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
 		add_action( 'admin_head', array( $this, 'customize_page_meta_boxes' ) );
-
+		add_action( 'customize_register', array( $this, 'remove_styles_sections'), 20, 1 );
 
 		parent::__construct();
 	}
 
 	function add_custom_options_page() {
-		if ( function_exists('acf_add_options_page') ) {
-			acf_add_options_page(array(
-				'page_title' 	=> 'SEO',
-				'menu_title'	=> 'SEO',
-				'menu_slug' 	=> 'spotted_seo',
-				'capability'	=> 'edit_posts',
-				'icon_url'     => 'dashicons-search',
-				'redirect'		=> false
-			));
-		}
+		// if ( function_exists('acf_add_options_page') ) {
+		// 	acf_add_options_page(array(
+		// 		'page_title' 	=> 'SEO',
+		// 		'menu_title'	=> 'SEO',
+		// 		'menu_slug' 	=> 'spotted_seo',
+		// 		'capability'	=> 'edit_posts',
+		// 		'icon_url'     => 'dashicons-search',
+		// 		'redirect'		=> false
+		// 	));
+		// }
 
 		acf_add_options_page(array(
 			'page_title'   => '404',
@@ -144,6 +144,10 @@ class SpottedSite extends TimberSite {
 	/* Remove add media buttons for all users */
 	function remove_add_media_buttons() {
 		remove_action( 'media_buttons', 'media_buttons' );
+	}
+
+	function remove_styles_sections($wp_customize) {
+    $wp_customize->remove_control('site_icon');
 	}
 }
 

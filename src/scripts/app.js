@@ -15,7 +15,6 @@ class App {
     const formNames = ['contact', 'modal']
     formNames.map((name) => {
       this[`${name}Form`] = new Form(name)
-      console.log(this[`${name}Form`])
     })
 
     this.io = new IntersectionObserver(this.onIntersection, {
@@ -63,7 +62,6 @@ class App {
     const message = $(this)
       .attr('href')
       .slice(2)
-    console.log(message)
     Barba.Dispatcher.trigger(message)
   }
 }

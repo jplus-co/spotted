@@ -1,4 +1,4 @@
-<section class="hero" {% if hero.image %}style="background-image: url({{Image(hero.image).src}})"{% endif %}>
+<section class="hero{{ reports_template ? ' hero--reports-template' }}" {% if hero.image and not reports_template %}style="background-image: url({{Image(hero.image).src}})"{% endif %}>
   <div class="hero__inner-wrapper">
     {% if hero.heading %}
       <h1 class="hero__heading io">{{hero.heading}}</h1>
@@ -11,5 +11,13 @@
       link: hero.link,
       toggle_label: hero.toggle_label,
     } %}
+
+    {% if reports_template %}
+      <div class="hero__image io-img">
+        <div class="hero__image-wrapper">
+          <img src="{{Image(hero.image).src}}" alt="{{Image(hero.image).alt}}">
+        </div>
+      </div>
+    {% endif %}
   </div>
 </section>

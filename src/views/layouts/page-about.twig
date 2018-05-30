@@ -73,9 +73,9 @@
         </div>
         <div class="section__row flex-l justify-center pb2 tc">
           {% for publication in news.publications %}
-            <div class="h3-ns h2 ph5 mb0-l mb5 io">
+            <a href="{{publication.link}}" target="_blank" class="db h3-ns h2 ph5 mb0-l mb5 io">
               <img src="{{Image(publication.logo).src}}" alt="{{publication.name}}" class="h-100 w-auto">
-            </div>
+            </a>
           {% endfor %}
         </div>
       </div>

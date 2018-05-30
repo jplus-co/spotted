@@ -1,0 +1,51 @@
+{% extends 'base.twig' %}
+
+{% set hero = post.get_field('hero') %}
+{% set section_one = post.get_field('section_one') %}
+{% set section_two = post.get_field('section_two') %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="brand">
+    <main class="content">
+      {% include 'hero.twig' with {
+        hero: hero,
+        reports_template: true
+      } %}
+      <section class="section">
+        <div class="section__row pt pb">
+          <blockquote class="testimonial">
+            <div class="testimonial__quote io">
+              <img src="{{site.theme.link}}/assets/images/open-quote@2x.png" alt="Open Quote">
+            </div>
+            <p class="testimonial__content io">
+              {{section_one.testimonial.quote}}
+            </p>
+            <p class="testimonial__title io">
+              {{section_one.testimonial.title}}
+            </p>
+          </blockquote>
+        </div>
+        <div class="section__row flex items-start pr5-ns">
+          <img src="{{site.theme.link}}/assets/images/curve-02@2x.png" alt="Purple Bezier Curve" class="curve io">
+        </div>
+      </section>
+      <section class="section pt pb">
+        <div class="reports-cta">
+          <div class="reports-cta__image io-img">
+            <div class="reports-cta__image-wrapper">
+              <img src="{{Image(section_two.image).src}}" alt="{{Image(section_two.image).alt}}">
+            </div>
+          </div>
+          <div class="reports-cta__form io">
+            {% filter shortcodes %}
+              {{ section_two.form_shortcode }}
+            {% endfilter %}
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}
