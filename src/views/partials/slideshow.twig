@@ -4,9 +4,12 @@
       <div class="slideshow__slide js-slideshow-slide hidden">
         <img src="{{Image(celeb.image).src}}" alt="{{celeb.name}}" class="slideshow__img">
         <ul class="slideshow__attributes">
-          {% for attr in celeb.attributes %}
+          {% for item in celeb.attributes %}
             <li class="attribute">
-              <span class="attribute__title js-attr-title">{{attr.title}}</span>
+              <div class="attribute__wrap js-attr-wrap">
+                <h3 class="attribute__title">{{item.attribute_title}}</h3>
+                <p class="attribute__value">{{item.attribute_value}}</p>
+              </div>
               <span class="attribute__line js-attr-line"></span>
             </li>
           {% endfor %}

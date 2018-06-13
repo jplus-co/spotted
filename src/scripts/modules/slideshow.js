@@ -204,7 +204,7 @@ class Slideshow extends Component {
   setSlide(index) {
     this.$slides.each((i, el) => {
       const attrEls = $(el)
-        .find('.js-attr-title, .js-attr-line')
+        .find('.js-attr-wrap, .js-attr-line')
         .toArray()
       anime.remove(attrEls)
       anime.remove(el)
@@ -274,7 +274,7 @@ class Slideshow extends Component {
       anime({
         targets: this.$slides
           .eq(index)
-          .find('.js-attr-title')
+          .find('.js-attr-wrap')
           .toArray(),
         opacity: [0, 1],
         easing: 'easeInOutCubic',
