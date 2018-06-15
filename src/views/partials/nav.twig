@@ -32,7 +32,7 @@
     {% else %}
       <a
         class="{{item.classes|join(' ')}} nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}"
-        {% if item.is_external %}
+        {% if item.is_external or item.title == 'Blog' or item.title == 'Log in' %}
           target="_blank"
           rel="noopener"
           href="{{item.link}}"

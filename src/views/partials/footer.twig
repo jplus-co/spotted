@@ -30,16 +30,20 @@
     {% endfor %}
   </nav>
   <ul class="footer__social io">
-    <li class="footer__social-item">
-      <a class="footer__social-link" href="/" target="_blank" rel="noopener">
-        {% include 'icon-facebook.twig' %}
-      </a>
-    </li>
-    <li class="footer__social-item">
-      <a class="footer__social-link" href="/" target="_blank" rel="noopener">
-        {% include 'icon-twitter.twig' %}
-      </a>
-    </li>
+    {% if options.fb_link %}
+      <li class="footer__social-item">
+        <a class="footer__social-link" href="{{ options.fb_link }}" target="_blank" rel="noopener">
+          {% include 'icon-facebook.twig' %}
+        </a>
+      </li>
+    {% endif %}
+    {% if options.twitter_link %}
+      <li class="footer__social-item">
+        <a class="footer__social-link" href="{{ options.twitter_link }}"  target="_blank" rel="noopener">
+          {% include 'icon-twitter.twig' %}
+        </a>
+      </li>
+    {% endif %}
   </ul>  
   <p class="footer__copyright io">© Spotted. All Rights Reserved.</p>
 </footer>

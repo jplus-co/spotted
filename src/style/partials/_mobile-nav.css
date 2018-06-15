@@ -18,6 +18,10 @@
     display: none;
   }
 
+  body.is-device & {
+    display: block;
+  }
+
   @media (width <= 700px) {
     left: 0;
   }
@@ -87,6 +91,10 @@
 
   @media (width > 850px) {
     display: none;
+  }
+
+  body.is-device & {
+    display: flex;
   }
 
   &__label {

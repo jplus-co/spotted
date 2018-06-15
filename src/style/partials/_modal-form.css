@@ -8,7 +8,8 @@
   pointer-events: none;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 3.5rem;
   &::before {
     content: '';
     position: fixed;
@@ -33,13 +34,17 @@
     max-width: 65rem;
     width: 100%;
     height: auto;
+    max-height: 100%;
     margin: 0 auto;
-    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     transform: translateX(100%);
-    transition: transform 0.7s var(--ease-in-out-quint), opacity 0.7s var(--ease-in-out-quint);
+    transition: transform 0.7s var(--ease-in-out-quint),
+      opacity 0.7s var(--ease-in-out-quint);
     opacity: 0;
     .modal-form.shown & {
-      transition: transform 0.7s var(--ease-out-expo), opacity 0.7s var(--ease-out-expo);
+      transition: transform 0.7s var(--ease-out-expo),
+        opacity 0.7s var(--ease-out-expo);
       transform: none;
       opacity: 1;
     }
@@ -49,22 +54,13 @@
   }
   &__inner-wrapper {
     background-color: var(--white);
-    will-change: transform, opacity;
     height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
     padding: 7rem 11rem;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: transform 0.7s var(--ease-in-out-quint), opacity 0.7s var(--ease-in-out-quint);
+
     @media (max-width: 650px) {
       padding: 3rem 3.5rem;
     }
-    .modal-form.shown & {
-      transition: transform 0.7s var(--ease-out-expo), opacity 0.7s var(--ease-out-expo);
-      opacity: 1;
-      transform: none;
-    }
+
     .wpcf7 {
       h1,
       h2,
@@ -180,7 +176,7 @@
           content: '🙌';
           margin-right: 0.4rem;
         }
-        +p {
+        + p {
           display: none;
         }
       }
@@ -201,11 +197,6 @@
     top: 1rem;
     right: 1rem;
     padding: 1.8rem 2.5rem;
-    transform: translateX(100%) rotate(180deg);
-    transition: transform 0.7s var(--ease-out-expo) 0.2s;
-    .shown & {
-      transform: none;
-    }
     &__icon {
       position: relative;
       width: 2.4rem;
