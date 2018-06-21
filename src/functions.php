@@ -37,32 +37,63 @@ class SpottedSite extends TimberSite {
 
 		add_filter( 'timber_context', array( $this, 'add_to_context' ) );
 		add_filter( 'get_twig', array( $this, 'add_to_twig' ) );
+		add_filter( 'nav_menu_css_class', array( $this, 'special_nav_class' ), 10, 2 );
+		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
 
 		add_action( 'init', array( $this, 'add_custom_options_page' ) );
-		add_filter( 'enter_title_here', array( $this, 'change_title_text' ) );
+		add_action('admin_head', array( $this, 'remove_add_media_buttons' ) );
 		add_action( 'wp_footer', array( $this, 'deregister_scripts' ) );
 		add_action( 'admin_head', array( $this, 'customize_page_meta_boxes' ) );
+		add_action( 'customize_register', array( $this, 'remove_styles_sections'), 20, 1 );
 
 		parent::__construct();
 	}
 
 	function add_custom_options_page() {
-		if ( function_exists('acf_add_options_page') ) {
-			acf_add_options_page(array(
-				'page_title' 	=> 'SEO',
-				'menu_title'	=> 'SEO',
-				'menu_slug' 	=> 'seo',
-				'capability'	=> 'edit_posts',
-				'parent_slug' => 'options-general.php',
-				'redirect'		=> false
-			));
-		}
+		// if ( function_exists('acf_add_options_page') ) {
+		// 	acf_add_options_page(array(
+		// 		'page_title' 	=> 'SEO',
+		// 		'menu_title'	=> 'SEO',
+		// 		'menu_slug' 	=> 'spotted_seo',
+		// 		'capability'	=> 'edit_posts',
+		// 		'icon_url'     => 'dashicons-search',
+		// 		'redirect'		=> false
+		// 	));
+		// }
+
+		acf_add_options_page(array(
+			'page_title'   => 'Social',
+			'menu_title'   => 'Social',
+			'menu_slug'    => 'spotted_footer',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-cloud',
+			'redirect'     => false
+		));
+
+		acf_add_options_page(array(
+			'page_title'   => '404',
+			'menu_title'   => '404',
+			'menu_slug'    => 'spotted_not_found_page',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-no',
+			'redirect'     => false
+		));
+
+		acf_add_options_page(array(
+			'page_title'   => 'Form Options',
+			'menu_title'   => 'Form Options',
+			'menu_slug'    => 'spotted_form_options',
+			'capability'   => 'edit_posts',
+			'icon_url'     => 'dashicons-feedback',
+			'redirect'     => false
+		));
 	}
 
 	function add_to_context( $context ) {
-		$context['menu'] = new TimberMenu();
+		$context['primary_nav'] = new TimberMenu('Primary Navigation');
+		$context['footer_nav'] = new TimberMenu('Footer Navigation');
 		$context['site'] = $this;
-		// $context['options'] = get_fields('option');
+		$context['options'] = get_fields('option');
 		return $context;
 	}
 
@@ -70,6 +101,17 @@ class SpottedSite extends TimberSite {
 		$twig->addExtension( new Twig_Extension_StringLoader() );
 		$twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
 		return $twig;
+	}
+
+	function special_nav_class($classes, $item){
+		if (
+			in_array( 'current-menu-item', $classes ) ||
+			in_array('current-menu-ancestor', $classes )
+		) {
+			$classes = array('current-menu-item');
+		}
+
+		return $classes;
 	}
 
 	function change_title_text( $title ){
@@ -106,7 +148,16 @@ class SpottedSite extends TimberSite {
 				}
 			</style>
 		';
-	}   
+	}
+
+	/* Remove add media buttons for all users */
+	function remove_add_media_buttons() {
+		remove_action( 'media_buttons', 'media_buttons' );
+	}
+
+	function remove_styles_sections($wp_customize) {
+    $wp_customize->remove_control('site_icon');
+	}
 }
 
 new SpottedSite();

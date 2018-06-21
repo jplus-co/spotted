@@ -1,0 +1,40 @@
+.button {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  background-color: var(--purple);
+  padding: 0 2.5rem;
+  text-align: center;
+
+  span {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 5rem;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: color-mod(var(--purple) l(60%));
+    transition: opacity 0.8s var(--ease-out-quint);
+    opacity: 0;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+}

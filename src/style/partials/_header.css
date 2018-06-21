@@ -1,0 +1,32 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--white);
+  z-index: 9998;
+
+  &__inner-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3.5rem;
+
+    @media (width <= 700px) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__home-link {
+    width: 13rem;
+  }
+
+  &__logo-img {
+    width: 100%;
+    height: auto;
+    margin-top: 1px;
+  }
+}

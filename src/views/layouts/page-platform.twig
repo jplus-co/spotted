@@ -1,0 +1,102 @@
+{% extends 'base.twig' %}
+
+{% set hero = post.get_field('hero') %}
+{% set section_one = post.get_field('section_one') %}
+{% set section_two = post.get_field('section_two') %}
+{% set section_three = post.get_field('section_three') %}
+{% set section_four = post.get_field('section_four') %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="platform">
+    <main class="content">
+      {% include 'hero.twig' with hero %}
+      <section class="section">
+        <div class="section__row pt5 pb ph">
+          <div class="lede ph io">{{post.get_field('intro_lede').lede}}</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{section_one.section_label}}</h2>
+        </aside>
+        <div class="section__inner relative bg-black pt ph pb5-l">
+          <div class="section__row flex-l flex-row-reverse items-center pb">
+            <div class="section__column tr-l tc pb0-ns pb4">
+              <img src="{{Image(section_one.image).src}}" alt="{{Image(section_one.image).alt}}" class="w-80-l w-60-m w-100 h-auto io">
+            </div>
+            <div class="section__column white">
+              {% include 'text-block.twig' with { text_block: section_one.text_block } %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{section_two.section_label}}</h2>
+        </aside>
+        <div class="section__row flex-l items-center pt pb mb">
+          <div class="section__column tc-l tl-m tc pb0-l pb5">
+            {% include 'grade-comparison.twig' with { 
+              grade_comparison: section_two.grade_comparison
+            } %}
+          </div>
+          <div class="section__column">
+            {% include 'text-block.twig' with { text_block: section_two.text_block } %}
+          </div>
+        </div>
+        <ul class="list section__row flex flex-wrap">
+          {% for item in section_two.list %}
+            <li class="list__item flex w-50-ns">
+              <div class="w-25 io">
+                <img src="{{Image(item.icon).src}}" alt="{{Image(item.icon).alt}}">
+              </div>
+              <div class="w-75">
+                <h3 class="list__heading io">{{item.heading}}</h3>
+                <div class="list__body io">{{item.body}}</div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="section__row flex items-start pr5-ns pb">
+          <img src="{{site.theme.link}}/assets/images/curve-01@2x.png" alt="Light Blue Bezier Curve" class="curve io">
+        </div>
+      </section>
+
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{section_three.section_label}}</h2>
+        </aside>
+        <div class="section__inner relative bg-black pt ph pb5-l">
+          <div class="section__row flex-l flex-row-reverse items-center pb">
+            <div class="section__column tr-l tc pb0-ns pb4">
+              <img src="{{Image(section_three.image).src}}" alt="{{Image(section_three.image).alt}}" class="w-80-l w-60-m w-100 h-auto io">
+            </div>
+            <div class="section__column white">
+              {% include 'text-block.twig' with { text_block: section_three.text_block } %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{section_four.section_label}}</h2>
+        </aside>
+        <div class="section__row flex-ns items-center pt pb">
+          <div class="section__column tc-l tl-m tc pb0-ns pb4">
+            <img src="{{Image(section_four.image).src}}" alt="{{Image(section_four.image).src}}" class="w-60-l w-80 h-auto io">
+          </div>
+          <div class="section__column">
+            {% include 'text-block.twig' with { text_block: section_four.text_block } %}
+          </div>
+        </div>
+      </section>
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+<button
+  class="nav-toggle js-nav-toggle"
+  aria-label="Menu"
+  aria-controls="mobile-nav"
+  aria-expanded="false"
+  tabindex="0"
+>
+  <span class="nav-toggle__icon">
+    <span class="line bg-black"></span>
+    <span class="line bg-black"></span>
+  </span>
+</button>
+
+<nav class="nav-menu js-nav-menu" id="mobile-nav">
+  <div class="nav-menu__inner-wrapper">
+    {% for item in nav.get_items %}
+      {% if item.children|length and loop.index != loop.length %}
+        <span
+          class="nav-menu__item accordian js-nav-menu-item js-accordian"
+          aria-label="Accordion Control Group"
+        >
+          <button
+            class="accordian__toggle js-accordian-toggle js-inert"
+            aria-controls="accordian-content-{{loop.index}}"
+            aria-expanded="false"
+            tabindex="-1"
+          >
+            {{item.title}}
+          </button>
+          <div
+            id="accordian-content-{{loop.index}}"
+            class="accordian__outer-wrapper js-accordian-outer"
+            aria-hidden="true"
+          >
+            <div class="accordian__inner-wrapper">
+              <ul class="accordian__list">
+                {% for child in item.get_children %}
+                  <li class="accordian__item">
+                    <a
+                      class="accordian__link js-accordian-link {{child.current ? ' current'}}"
+                      {% if child.is_external %}
+                        target="_blank"
+                        rel="noopener"
+                        href="{{child.link}}"
+                      {% else %}
+                        href="{{child.link|relative}}"
+                      {% endif %} 
+                      tabindex="-1"
+                    >
+                        <span>{{child.title}}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </span>
+      {% else %}
+        <a
+          class="nav-menu__item js-nav-menu-item js-inert{{item.current ? ' current'}}"
+          tabindex="-1"
+          {% if item.is_external %}
+            target="_blank"
+            rel="noopener"
+            href="{{item.link}}"
+          {% else %}
+            href="{{item.link|relative}}"
+          {% endif %}
+        >
+          <span>{{item.title}}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+
+    <button class="nav-toggle js-nav-toggle js-inert" tabindex="-1">
+      <span class="nav-toggle__label js-nav-toggle-label white">Close</span>
+      <span class="nav-toggle__icon">
+        <span class="line bg-white"></span>
+        <span class="line bg-white"></span>
+      </span>
+    </button>
+
+  </div>
+</nav>

@@ -1,4 +1,5 @@
 import anime from 'animejs'
+import $ from 'jquery'
 
 export default function fade(oldContainer, newContainer, done) {
   return animateOut()
@@ -10,14 +11,17 @@ export default function fade(oldContainer, newContainer, done) {
       opacity: 0,
       easing: 'easeOutQuart',
     }).finished.then(() => {
-      oldContainer.style.display = 'none'
+      $(oldContainer).hide()
       animateIn()
     })
   }
 
   function animateIn() {
-    newContainer.style.opacity = 0
-    newContainer.style.visibility = 'visible'
+    $(window).scrollTop(0)
+    $(newContainer).css({
+      opacity: 0,
+      visibility: 'visible',
+    })
     return anime({
       targets: newContainer,
       duration: 500,

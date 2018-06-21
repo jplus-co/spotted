@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="not-found">
+    <main class="content">
+      <div class="not-found">
+        <div class="not-found__inner-wrapper">
+          <h1 class="not-found__heading">404</h1>
+          <p class="not-found__message">Whoops! This page doesn’t exist.</p>
+        </div>
+        <div class="not-found__background js-background"></div>
+      </div>
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

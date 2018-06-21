@@ -1,0 +1,60 @@
+{% extends 'base.twig' %}
+
+{% set hero = post.get_field('hero') %}
+{% set layouts = post.get_field('layouts') %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="brand-template">
+    <main class="content">
+      {% include 'hero.twig' with hero %}
+      {% for section in layouts %}
+        <section class="section">
+          {% if section.acf_fc_layout == 'columns' %}
+            {% if section.first_column == 'text' %}
+              <div class="section__row flex-column-reverse flex-row-l flex items-center pt pb">
+            {% elseif section.first_column == 'image' %}
+              <div class="section__row flex-column-reverse flex-row-reverse-l flex items-center pt pb">
+            {% endif %}
+            {% if section.first_column == 'text' %}
+              <div class="section__column ma0 pr4-l"> 
+            {% elseif section.first_column == 'image' %}
+              <div class="section__column ma0 pl4-l">
+            {% endif %}
+                {% include 'text-block.twig' with {
+                  classes: 'text-block--push-right',
+                  text_block: section.text_block
+                } %}
+              </div>
+              {% if section.first_column == 'text' %}
+                <div class="section__column pb5 pb0-l pl4-l ma0 tc-m tl">
+              {% elseif section.first_column == 'image' %}
+                <div class="section__column pb5 pb0-l pr4-l ma0 tc-m tr">
+              {% endif %}
+                <img src="{{Image(section.image).src}}" alt="{{Image(section.image).src}}" class="w-100 w-75-m w-95-l h-auto io">
+              </div>
+            </div>
+          {% elseif section.acf_fc_layout == 'testimonial' %}
+            <div class="section__row pt pb">
+              <blockquote class="testimonial">
+                <div class="testimonial__quote io">
+                  <img src="{{site.theme.link}}/assets/images/open-quote@2x.png" alt="Open Quote">
+                </div>
+                <p class="testimonial__content io">
+                  {{section.testimonial.quote}}
+                </p>
+                <p class="testimonial__title io">
+                  {{section.testimonial.title}}
+                </p>
+              </blockquote>
+            </div>
+          {% endif %}
+        </section>
+
+      {% endfor %}
+
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

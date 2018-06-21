@@ -1,0 +1,16 @@
+.default-template {
+  padding: 25vh 2rem 0 2rem;
+  &__title {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 5.5rem;
+    font-weight: 700;
+    max-width: 106rem;
+    margin: 0 auto 10rem auto;
+  }
+  &__content {
+    max-width: 79.1rem;
+    margin: 0 auto 10rem auto;
+    font-size: 2rem;
+    line-height: 1.4;
+  }
+}

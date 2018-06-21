@@ -1,0 +1,12 @@
+<div class="modal-form js-modal-form">
+  <div class="modal-form__outer-wrapper">
+    <div class="modal-form__inner-wrapper">
+      {% filter shortcodes %}
+        {{shortcode}}
+      {% endfilter %}
+      <button class="modal-form__close-button js-modal-form-close-button">
+        <div class="modal-form__close-button__icon"></div>
+      </button>
+    </div>
+  </div>
+</div>

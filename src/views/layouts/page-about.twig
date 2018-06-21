@@ -1,0 +1,87 @@
+{% extends 'base.twig' %}
+
+{% set hero = post.get_field('hero') %}
+{% set mission = post.get_field('mission_block') %}
+{% set team = post.get_field('team_block') %}
+{% set careers = post.get_field('careers_block') %}
+{% set news = post.get_field('news_block') %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="about">
+    <main class="content">
+      {% include 'hero.twig' with hero %}
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{mission.section_label}}</h2>
+        </aside>
+        <div class="section__inner relative bg-black mb ph push-up">
+          <div class="section__row flex-l pt pb">
+            <div class="section__column">
+              <div class="section__images">
+                <div class="section__image io-img">
+                  <div class="section__image-wrapper">
+                    <img src="{{Image(mission.image).src}}" alt="{{Image(mission.image).alt}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="section__column white">
+              {% include 'text-block.twig' with { text_block: mission.text_block } %}
+            </div>
+          </div>
+        </div>
+        <div class="section__row pb">
+          <div class="lede io">{{ mission.lede }}</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{team.section_label}}</h2>
+        </aside>
+        <div class="section__row flex-ns items-center pb">
+          <div class="section__column tc-l tl-m tc pb0-ns pb4">
+            <img src="{{Image(team.image).src}}" alt="{{Image(team.image).src}}" class="w-60-l w-80 h-auto io">
+          </div>
+          <div class="section__column">
+            {% include 'text-block.twig' with { text_block: team.text_block } %}
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <aside class="section__aside">
+          <h2 class="section__sticky-label">{{careers.section_label}}</h2>
+        </aside>
+        <div class="section__inner relative bg-black pt ph pb5-l mb7-ns">
+          <div class="section__row flex-l flex-row-reverse items-center pb">
+            <div class="section__column tr-l tc pb0-ns pb4">
+              <img src="{{Image(careers.image).src}}" alt="{{Image(careers.image).alt}}" class="w-80-l w-60-m w-100 h-auto io">
+            </div>
+            <div class="section__column white">
+              {% include 'text-block.twig' with { text_block: careers.text_block } %}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bg-gray-blue white tc pt5 pb6-l pb5">
+        <div class="text-block__heading pb5 io">
+          {{news.heading}}
+        </div>
+        <div class="section__row flex-l justify-center pb2 tc">
+          {% for publication in news.publications %}
+            <a href="{{publication.link}}" target="_blank" class="db h3-ns h2 ph5 mb0-l mb5 io">
+              <img src="{{Image(publication.logo).src}}" alt="{{publication.name}}" class="h-100 w-auto">
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

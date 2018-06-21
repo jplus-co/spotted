@@ -1,6 +1,6 @@
-import home from './home'
-import single from './single'
+import Home from './Home'
+import NotFound from './NotFound'
 
-const views = [home, single]
+const views = [Home, NotFound]
 
 export default views

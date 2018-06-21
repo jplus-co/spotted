@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Karla', sans-serif;
+  font-size: 1.6rem;
+  background-color: var(--white);
+  transition: opacity 1s var(--ease-out-quint);
+
+  &.is-loading {
+    opacity: 0;
+  }
+
+  &.no-tab {
+    button,
+    input,
+    a {
+      outline: unset;
+    }
+  }
+}
+
+main.content {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--white);
+}
+
+figure {
+  margin: 0;
+}
+
+::selection {
+  background-color: color-mod(var(--purple) a(25%));
+}

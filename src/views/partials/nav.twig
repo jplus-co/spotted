@@ -1,0 +1,47 @@
+<nav class="nav js-nav">
+  {% for item in nav.get_items %}
+    {% if item.children|length and loop.index != loop.length %}
+      <span class="nav__item js-dropdown" aria-label="Dropdown Menu">
+        <button class="dropdown__toggle js-dropdown-toggle" aria-expanded="false" aria-controls="dropdown-{{loop.index}}">
+          {{item.title}}
+        </button>
+        <div class="dropdown__outer-wrapper js-dropdown-outer">              
+          <div class="dropdown__inner-wrapper">
+            <ul class="dropdown__list js-dropdown-list" id="dropdown-{{loop.index}}">
+              {% for child in item.get_children %}
+                <li class="dropdown__item js-dropdown-item">
+                  <a
+                    class="dropdown__link js-dropdown-link{{child.classes|join(' ')}}"
+                    {% if child.is_external %}
+                      target="_blank"
+                      rel="noopener"
+                      href="{{child.link}}"
+                    {% else %}
+                      href="{{child.link|relative}}"
+                    {% endif %} 
+                    tabindex="-1"
+                  >
+                      <span>{{child.title}}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </span>
+    {% else %}
+      <a
+        class="{{item.classes|join(' ')}} nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}"
+        {% if item.is_external or item.title == 'Blog' or item.title == 'Log in' %}
+          target="_blank"
+          rel="noopener"
+          href="{{item.link}}"
+        {% else %}
+          href="{{item.link|relative}}"
+        {% endif %}
+      >
+        <span>{{item.title}}</span>
+      </a>
+    {% endif %}
+  {% endfor %}
+</nav>

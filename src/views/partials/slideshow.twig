@@ -1,0 +1,25 @@
+<div class="slideshow js-slideshow">
+  <div class="slideshow__slides">
+    {% for celeb in slideshow %}
+      <div class="slideshow__slide js-slideshow-slide hidden">
+        <img src="{{Image(celeb.image).src}}" alt="{{celeb.name}}" class="slideshow__img">
+        <ul class="slideshow__attributes">
+          {% for item in celeb.attributes %}
+            <li class="attribute">
+              <div class="attribute__wrap js-attr-wrap">
+                <h3 class="attribute__title">{{item.attribute_title}}</h3>
+                <p class="attribute__value">{{item.attribute_value}}</p>
+              </div>
+              <span class="attribute__line js-attr-line"></span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="slideshow__pagination">
+    {% for celeb in slideshow %}
+      {% include 'pagination-button.twig' with { title: loop.index } %}
+    {% endfor %}
+  </div>
+</div>

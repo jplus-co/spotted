@@ -1,0 +1,10 @@
+.curve {
+  object-fit: cover;
+  object-position: right;
+  height: 25rem;
+  margin: 4rem 0;
+
+  @media (width <= 60em) {
+    margin-bottom: 0;
+  }
+}

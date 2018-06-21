@@ -1,0 +1,49 @@
+.bg-black {
+  background-color: var(--black);
+}
+
+.bg-gray-blue {
+  background-color: var(--gray-blue);
+}
+
+.pt {
+  padding-top: 13.5rem;
+
+  @media (width <= 60em) {
+    padding-top: 7rem;
+  }
+
+  @media (width <= 30em) {
+    padding-top: 3rem;
+  }
+}
+
+.pb {
+  padding-bottom: 7.5rem;
+
+  @media (width <= 30em) {
+    padding-bottom: 4rem;
+  }
+}
+
+.ph {
+  padding-right: 3.5rem;
+  padding-left: 3.5rem;
+
+  @media (width <= 700px) {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+.mb {
+  margin-bottom: 7.5rem;
+
+  @media (width <= 30em) {
+    margin-bottom: 4rem;
+  }
+}
+
+.push-up {
+  margin-top: -5rem;
+}
