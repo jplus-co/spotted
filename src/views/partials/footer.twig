@@ -16,7 +16,7 @@
       {% else %}
         <a
           class="footer__nav-link"
-          {% if item.is_external %}
+          {% if item.is_external or item.title == 'Blog' %}
             href="{{item.link}}"
             target="_blank"
             rel="noopener"
@@ -41,6 +41,20 @@
       <li class="footer__social-item">
         <a class="footer__social-link" href="{{ options.twitter_link }}"  target="_blank" rel="noopener">
           {% include 'icon-twitter.twig' %}
+        </a>
+      </li>
+    {% endif %}
+    {% if options.medium_link %}
+      <li class="footer__social-item">
+        <a class="footer__social-link" href="{{ options.medium_link }}"  target="_blank" rel="noopener">
+          {% include 'icon-medium.twig' %} 
+        </a>
+      </li>
+    {% endif %}
+    {% if options.linkedin_link %}
+      <li class="footer__social-item">
+        <a class="footer__social-link" href="{{ options.linkedin_link }}"  target="_blank" rel="noopener">
+          {% include 'icon-linkedin.twig' %}
         </a>
       </li>
     {% endif %}

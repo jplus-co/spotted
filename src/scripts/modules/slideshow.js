@@ -20,7 +20,8 @@ class Slideshow extends Component {
     this.slideDuration = 5000
 
     this.state = {
-      supported: clipPathShapeSupport() && gridLayoutSupport(),
+      // supported: clipPathShapeSupport() && gridLayoutSupport(),
+      supported: false,
       currentIndex: 0,
       playing: true,
     }
