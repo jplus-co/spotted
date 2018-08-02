@@ -1,3 +1,4 @@
+import '../style/theme.css'
 import '../style/index.css'
 import 'tachyons'
 import 'scroll-restoration-polyfill'
