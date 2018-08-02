@@ -1,4 +1,4 @@
-<section class="hero{{ reports_template ? ' hero--reports-template' }}" {% if hero.image and not reports_template %}style="background-image: url({{Image(hero.image).src}})"{% endif %}>
+<section class="hero{{ reports_template ? ' hero--reports-template' }}{{ simple_resource_template ? ' hero--simple-resource-template' }}" {% if hero.image and not reports_template %}style="background-image: url({{Image(hero.image).src}})"{% endif %}>
   <div class="hero__inner-wrapper">
     {% if hero.heading %}
       <h1 class="hero__heading io">{{hero.heading}}</h1>
@@ -10,8 +10,8 @@
       button_type: hero.button_type,
       link: hero.link,
       toggle_label: hero.toggle_label,
+      form_name: hero.form_name,
     } %}
-
     {% if reports_template %}
       <div class="hero__image io-img">
         <div class="hero__image-wrapper">
