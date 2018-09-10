@@ -9,7 +9,7 @@
 {% elseif button_type == 'toggle' %}
   <a
     class="button js-button js-form-toggle io"
-    href="{{site.link|relative}}/#modal"
+    href="{{site.link|relative}}/#{{ form_name|length > 1 ? form_name : form_name|first }}"
   >
     <span>{{toggle_label}}</span>
   </a>

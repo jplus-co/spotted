@@ -16,7 +16,14 @@
 		{% endblock %}
 	</div>
 
-	{% include 'modal-form.twig' with { shortcode: options.modal_form_shortcode } %}
+	{% include 'modal-form.twig' with {
+		form_name: 'modal',
+		shortcode: options.modal_form_shortcode
+	} %}
+	{% include 'modal-form.twig' with {
+		form_name: 'simple',
+		shortcode: options.simple_form_shortcode
+	} %}
 	{% include 'contact-form.twig' with { shortcode: options.contact_form_shortcode } %}
 
 	<script>

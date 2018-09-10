@@ -12,8 +12,8 @@ class App {
 
     this.header = new Header($('.js-header'))
 
-    const formNames = ['contact', 'modal']
-    formNames.map((name) => {
+    const formNames = ['contact', 'modal', 'simple']
+    formNames.map(name => {
       this[`${name}Form`] = new Form(name)
     })
 
