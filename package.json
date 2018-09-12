@@ -11,6 +11,7 @@
     "barba.js": "^1.0.0",
     "domready": "^1.0.8",
     "fastclick": "^1.0.6",
+    "iframe-resizer": "^3.6.1",
     "jquery": "^3.3.1",
     "scroll-restoration-polyfill": "^0.6.1",
     "sniffer": "github:watsondg/sniffer",

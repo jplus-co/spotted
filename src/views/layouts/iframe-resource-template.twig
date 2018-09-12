@@ -1,0 +1,17 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+  <div class="barba-container" data-namespace="iframe-resource">
+    <main class="content" style="padding-top: 7.2rem;">
+      <iframe
+        src="{{post.iframe_url}}"
+        frameborder="0"
+        scolling="no"
+        style="width: 1px; min-width: 100%; min-height: 100vh;"
+      ></iframe>
+    </main>
+    {% include 'footer.twig' %}
+  </div>
+
+{% endblock %}

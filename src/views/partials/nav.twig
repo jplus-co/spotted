@@ -12,7 +12,7 @@
                 <li class="dropdown__item js-dropdown-item">
                   <a
                     class="dropdown__link js-dropdown-link{{child.classes|join(' ')}}"
-                    {% if child.is_external %}
+                    {% if child.is_target_blank %}
                       target="_blank"
                       rel="noopener"
                       href="{{child.link}}"
@@ -32,7 +32,7 @@
     {% else %}
       <a
         class="{{item.classes|join(' ')}} nav__{{loop.index == loop.length ? 'button js-button' : 'item'}}"
-        {% if item.is_external or item.title == 'Blog' or item.title == 'Log in' %}
+        {% if item.is_target_blank %}
           target="_blank"
           rel="noopener"
           href="{{item.link}}"
