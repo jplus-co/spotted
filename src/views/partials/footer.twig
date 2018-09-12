@@ -16,7 +16,7 @@
       {% else %}
         <a
           class="footer__nav-link"
-          {% if item.is_external or item.title == 'Blog' %}
+          {% if item.is_target_blank %}
             href="{{item.link}}"
             target="_blank"
             rel="noopener"

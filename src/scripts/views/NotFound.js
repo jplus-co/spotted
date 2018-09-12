@@ -1,5 +1,4 @@
 import Barba from 'barba.js'
-import $ from 'jquery'
 import Background from '../modules/background'
 
 const NotFound = Barba.BaseView.extend({
