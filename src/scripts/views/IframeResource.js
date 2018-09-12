@@ -8,7 +8,7 @@ const IframeResource = Barba.BaseView.extend({
   onEnter() {
     this.$iframe = $(this.container).find('iframe')
     this.iframeResizer = resizer.iframeResizer(
-      { heightCalculationMethod: 'documentElementScroll', log: true },
+      { heightCalculationMethod: 'documentElementScroll' },
       this.$iframe[0],
     )
   },
