@@ -16,7 +16,7 @@ const IframeResource = Barba.BaseView.extend({
   onEnterCompleted() {},
 
   onLeave() {
-    this.iframeResizer.close()
+    this.$iframe[0].iFrameResizer.close()
   },
 
   onLeaveCompleted() {},
