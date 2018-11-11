@@ -1,6 +1,6 @@
 .slideshow {
-  position: absolute;
-  top: -3.5rem;
+  /* position: absolute; */
+  top: 0;
   right: 7.5rem;
   left: 50%;
   height: 68rem;
