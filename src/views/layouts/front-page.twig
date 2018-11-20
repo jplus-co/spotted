@@ -1,29 +1,53 @@
 {% extends 'base.twig' %}
 
 {% set hero = post.get_field('hero') %}
+{% set news = post.get_field('news_block') %}
+{% set featured_testimonial = post.get_field('featured_testimonial') %}
 {% set why = post.get_field('why_block') %}
 {% set products = post.get_field('products_block') %}
 {% set brands = post.get_field('brands_block') %}
-{% set news = post.get_field('news_block') %}
 
 {% block content %}
 
   <div class="barba-container" data-namespace="home">
     <main class="content">
-      {% include 'hero.twig' with hero %}
+      {% include 'home-hero.twig' with {
+        hero: hero,
+        news: news
+      } %}
+
+      <div class="section__row pb">
+        <blockquote class="testimonial">
+          <p class="testimonial__content io">
+            <span class="relative z-1">{{featured_testimonial.quote}}</span>
+            <span
+              class="testimonial__quote testimonial__quote--open"
+              style="background-image: url({{site.theme.link}}/assets/images/quote-open.svg);"
+            ></span>
+            <span
+              class="testimonial__quote testimonial__quote--close"
+              style="background-image: url({{site.theme.link}}/assets/images/quote-close.svg);"
+            ></span>
+          </p>
+          <p class="testimonial__title io">
+            {{featured_testimonial.title}}
+          </p>
+        </blockquote>
+      </div>
+
       <section class="section">
         <aside class="section__aside">
           <h2 class="section__sticky-label">{{why.section_label}}</h2>
         </aside>
-        <div class="section__row flex flex-row-l flex-column-reverse pt pb">
-          <div class="section__column">
+        <div class="section__row flex flex-row-l flex-column-reverse pb">
+          <div class="section__column pt5 pb">
             {% include 'text-block.twig' with {text_block: why.text_block} %}
           </div>
-          <div class="section__column ">
+          <div class="section__column">
             {% include 'slideshow.twig' with {slideshow: why.slideshow} %}
           </div>
         </div>
-        <div class="section__row pt pb">
+        <div class="section__row pb">
           <div class="lede io">{{ why.lede }}</div>
         </div>
         <ul class="list section__row flex flex-wrap pb">
@@ -100,36 +124,7 @@
             form_name: brands.text_block.form_name
           } %}
         </div>
-        <div class="section__row flex items-start pr5-ns">
-          <img src="{{site.theme.link}}/assets/images/curve-01@2x.png" alt="Light Blue Bezier Curve" class="curve io">
-        </div>
-        <div class="section__row pb">
-          <blockquote class="testimonial">
-            <div class="testimonial__quote io">
-              <img src="{{site.theme.link}}/assets/images/open-quote@2x.png" alt="Open Quote">
-            </div>
-            <p class="testimonial__content io">
-              {{brands.featured_testimonial.quote}}
-            </p>
-            <p class="testimonial__title io">
-              {{brands.featured_testimonial.title}}
-            </p>
-          </blockquote>
-        </div>
       </section>
-      {# style="height: 30rem; padding: 7.2rem 0;" #}
-      <div class="bg-gray-blue white tc pt5 pb6-l pb5">
-        <div class="text-block__heading pb5 io">
-          {{news.heading}}
-        </div>
-        <div class="section__row flex-l justify-center pb2 tc">
-          {% for publication in news.publications %}
-            <a href="{{publication.link}}" target="_blank" class="db h3-ns h2 ph5 mb0-l mb5 io">
-              <img src="{{Image(publication.logo).src}}" alt="{{publication.name}}" class="h-100 w-auto">
-            </a>
-          {% endfor %}
-        </div>
-      </div>
     </main>
     {% include 'footer.twig' %}
   </div>

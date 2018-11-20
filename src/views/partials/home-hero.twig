@@ -1,0 +1,51 @@
+<section class="home-hero">
+  <div
+    class="home-hero__main"
+    {% if hero.image %}
+      style="background-image: url({{Image(hero.image).src}})"
+    {% endif %}
+  >
+    <div class="home-hero__main__inner-wrapper">
+      {% if hero.heading %}
+        <h1 class="home-hero__main__heading io">
+          {{hero.heading}}
+        </h1>
+      {% endif %}
+      {% if hero.body %}
+        <div class="home-hero__main__body io">
+          {{hero.body}}
+        </div>
+      {% endif %}
+      {% include 'button.twig' with {
+        button_type: hero.button_type,
+        link: hero.link,
+        toggle_label: hero.toggle_label,
+        form_name: hero.form_name,
+      } %}
+    </div>
+  </div>
+  
+  <div class="home-hero__press">
+    <div class="home-hero__press__heading io">
+      {{news.heading}}
+    </div>
+    <div class="home-hero__press__outer-wrapper">
+      <div class="home-hero__press__inner-wrapper">
+        {% for publication in news.publications %}
+          <a
+            class="home-hero__press__link io"
+            href="{{publication.link}}"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              class="home-hero__press__image"
+              src="{{Image(publication.logo).src}}"
+              alt="{{publication.name}}"
+            >
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
