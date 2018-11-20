@@ -6,6 +6,8 @@
 
 {% block content %}
 
+  {{pages|print_r}}
+
   <div class="barba-container" data-namespace="simple-resource">
     <main class="content">
       {% include 'hero.twig' with {
@@ -17,18 +19,22 @@
           <img class="w-100" src="{{Image(section_one.resource_image).src}}" alt="">
         </div>
       </section>
-      <div class="w-100 ph">
-        <div class="tc white bg-gray-blue ph5 pt6 pb6">
-          <div class="pb5">
-            <h1 class="section__heading">{{section_two.text_block.heading}}</h1>
+      <section class="section pb">
+        <div class="simple-cta">
+          <div
+            id="simple-cta-form"
+            class="simple-cta__form js-simple-resource-form io"
+            {% if section_two.has_download %}
+              data-file-url="{{section_two.downloadable_content.url}}"
+              data-download-link-label="{{section_two.download_link_label}}"
+            {% endif %}
+          >
+            {% filter shortcodes %}
+              {{ section_two.form_shortcode }}
+            {% endfilter %}
           </div>
-          {% include 'button.twig' with {
-            button_type: section_two.text_block.button_type,
-            toggle_label: section_two.text_block.toggle_label,
-            form_name: section_two.text_block.form_name
-          } %}
         </div>
-      </div>
+      </section>
     </main>
     {% include 'footer.twig' %}
   </div>

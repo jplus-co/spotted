@@ -7,10 +7,10 @@
       <div class="hero__body io">{{hero.body}}</div>
     {% endif %}
     {% include 'button.twig' with {
-      button_type: hero.button_type,
+      button_type: hero.button_type ? hero.button_type : 'jump',
       link: hero.link,
-      toggle_label: hero.toggle_label,
-      form_name: hero.form_name,
+      toggle_label: hero.jump_to_form_button_label ? hero.jump_to_form_button_label : hero.toggle_label,
+      form_name: hero.form_name
     } %}
     {% if reports_template %}
       <div class="hero__image io-img">
